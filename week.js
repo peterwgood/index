@@ -60,7 +60,7 @@ function updateList() {
     return `
       <li class="list-group-item">
         ${daysOfWeek[index]}: -${entry} calories
-        <button class="delete-btn btn btn-warning btn-sm" data-index="${index}">Delete</button>
+        <button class="delete-btn btn btn-danger btn-sm" data-index="${index}">Delete</button>
       </li>
     `;
   }).join('');
