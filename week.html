@@ -42,15 +42,18 @@
   </div>
 </nav>
 	  
-<div class="container">
-    <h1>Weekly</h1>
-    <input type="number" id="calorie-input" placeholder="Enter calorie amount">
+<div class="container py-4">
+  <h1 class="display-5 fw-bold">Weekly</h1>
+  <div class="input-group mb-3">
+    <input type="number" id="calorie-input" placeholder="Enter calorie amount" class="form-control">
     <button id="add-btn" class="btn btn-primary">Add</button>
-    <button id="reset-btn" class="btn btn-danger">Reset</button>
-    <ul id="calorie-list" class="list-group">
-    </ul>
-    <p id="total-calories">Total Calories: 11900</p>
   </div>
+  <button id="reset-btn" class="btn btn-danger mb-3">Reset</button>
+  <ul id="calorie-list" class="list-group mb-3">
+    <!-- list items will be dynamically added here -->
+  </ul>
+  <p id="total-calories" class="fw-bold fs-4">Remaining Calories: <span id="total-calories-value">11900</span></p>
+</div>
 
   
   <script src="week.js"></script>
