@@ -68,7 +68,7 @@ function updateList() {
 }
 
 function updateTotal() {
-  totalCalories.textContent = `Total Calories: ${calories}`;
+  totalCalories.textContent = `Remaining Calories: ${calories}`;
 }
 
 calorieList.addEventListener('click', (event) => {
