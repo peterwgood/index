@@ -1,5 +1,5 @@
 function saveData() {
-  const date = document.getElementById("date").value;
+  const date = new Date(document.getElementById("date").value + "T00:00:00"); // Add "T00:00:00" to specify the timezone offset
   const weight = parseFloat(document.getElementById("weight").value);
   const log = document.getElementById("log");
   const entry = `<p>${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></p>`;
@@ -20,14 +20,12 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// Set current date and time as default value for date input field
+// Set current date as default value for date input field
 const now = new Date();
 const year = now.getFullYear();
 const month = now.getMonth() + 1;
 const day = now.getDate();
-const hour = now.getHours();
-const minute = now.getMinutes();
-document.getElementById("date").value = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+document.getElementById("date").value = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
 // Delete entry function
 function deleteEntry(btn) {
@@ -46,11 +44,8 @@ function resetData() {
 
 // Format date function
 function formatDate(date) {
-  const dateObj = new Date(date);
-  const month = dateObj.getMonth() + 1;
-  const day = dateObj.getDate();
-  const year = dateObj.getFullYear();
-  const hour = dateObj.getHours();
-  const minute = dateObj.getMinutes();
-  return `${month}/${day}/${year} ${hour}:${minute.toString().padStart(2, '0')}`;
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${month}/${day}/${year}`; // Return date in MM/DD/YYYY format
 }
