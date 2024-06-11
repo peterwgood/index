@@ -29,8 +29,8 @@ function updateList() {
     return `
       <li class="list-group-item" data-index="${index}">
         <span>${item}</span>
-        <button class="delete btn btn-sm btn-danger" onclick="deleteItem(${index})"><i class="fa-solid fa-trash"></i></button>
-        <button class="edit btn btn-sm btn-secondary" onclick="editItem(${index})"><i class="fas fa-edit"></i></button>
+        <button class="delete btn btn-sm btn-danger" onclick="deleteItem(${index})">Delete</button>
+        
       </li>
     `;
   }).join('');
