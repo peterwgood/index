@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const name = nameInput.value.trim();
     const calorieAmount = parseInt(calorieAmountInput.value.trim());
 
-    if (name && !isNaN(calorieAmount)) {
+    if (name !== "" && !isNaN(calorieAmount)) {
       data.remainingCalories -= calorieAmount;
       data.totalCaloriesUsed += calorieAmount;
       data.entries.push({ name, calorieAmount });
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
       nameInput.value = "";
       calorieAmountInput.value = "";
     } else {
-      alert("Please fill in both fields.");
+      alert("Please enter a valid name and calorie amount.");
     }
   }
 
@@ -35,12 +35,28 @@ document.addEventListener("DOMContentLoaded", function(){
   nameInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
+      const name = nameInput.value.trim();
+      const calorieAmount = parseInt(calorieAmountInput.value.trim());
+
+      if (name !== "" && !isNaN(calorieAmount)) {
+        addEntry();
+      } else {
+        alert("Please enter a valid name and calorie amount.");
+      }
     }
   });
 
   calorieAmountInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
+      const name = nameInput.value.trim();
+      const calorieAmount = parseInt(calorieAmountInput.value.trim());
+
+      if (name !== "" && !isNaN(calorieAmount)) {
+        addEntry();
+      } else {
+        alert("Please enter a valid name and calorie amount.");
+      }
     }
   });
 
