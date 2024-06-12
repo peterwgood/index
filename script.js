@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
   entryListElement.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-button")) {
-      const rowElement = event.target.parentNode.parentNode;
-      const entryName = rowElement.cells[0].textContent;
+      const entryElement = event.target.parentNode.parentNode;
+      const entryName = entryElement.querySelector("span").textContent;
       const [name, calorieAmount] = entryName.split(" - ");
       const index = data.entries.findIndex((entry) => entry.name === name && entry.calorieAmount === parseInt(calorieAmount));
       if (index > -1) {
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function(){
         data.totalCaloriesUsed -= parseInt(calorieAmount);
         saveData();
         renderEntryList();
-        rowElement.remove();
+        entryElement.remove();
       }
     }
   });
@@ -90,15 +90,23 @@ document.addEventListener("DOMContentLoaded", function(){
 
   function renderEntryList() {
     entryListElement.innerHTML = "";
+    const ul = document.createElement("UL");
+    ul.className = "list-unstyled"; // Remove bullet points
     data.entries.forEach((entry) => {
+      const li = document.createElement("LI");
+     
+      li.style.padding = "5px 10px 10px 10px"; // Add padding
+     
+	
+   
       const entryHTML = `
-        <tr class="border-bottom"> 
-          <td>${entry.name} - ${entry.calorieAmount}</td>
-          <td><button class="btn btn-danger delete-button">Delete</button></td>
-        </tr>
+        <span>${entry.name} - ${entry.calorieAmount}</span>
+        <button class="btn btn-danger btn-sm delete-button">Delete</button>
       `;
-      entryListElement.insertAdjacentHTML("beforeend", entryHTML);
+      li.innerHTML = entryHTML;
+      ul.appendChild(li);
     });
+    entryListElement.appendChild(ul);
     remainingCaloriesElement.textContent = data.remainingCalories;
     totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
   }
