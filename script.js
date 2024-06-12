@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function(){
     entryListElement.innerHTML = "";
     data.entries.forEach((entry) => {
       const entryHTML = `
-        <tr>
+        <tr class="border-bottom"> 
           <td>${entry.name} - ${entry.calorieAmount}</td>
           <td><button class="btn btn-danger delete-button">Delete</button></td>
         </tr>
