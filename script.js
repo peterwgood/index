@@ -1,102 +1,101 @@
-const nameInput = document.getElementById("name");
-const calorieAmountInput = document.getElementById("calorie-amount");
-const addEntryButton = document.getElementById("add-entry");
-const resultElement = document.getElementById("result");
-const entryListElement = document.getElementById("entry-list");
-const remainingCaloriesElement = document.getElementById("remaining-calories-value");
-const totalCaloriesUsedElement = document.getElementById("total-calories-used-value");
-const resetButton = document.getElementById("reset-button");
+document.addEventListener("DOMContentLoaded", function(){
+  const nameInput = document.getElementById("name");
+  const calorieAmountInput = document.getElementById("calorie-amount");
+  const addEntryButton = document.getElementById("add-entry");
+  const entryListElement = document.getElementById("entry-list");
+  const remainingCaloriesElement = document.getElementById("remaining-calories-value");
+  const totalCaloriesUsedElement = document.getElementById("total-calories-used-value");
+  const resetButton = document.getElementById("reset-button");
 
-let remainingCalories = 1700;
-let totalCaloriesUsed = 0;
-let entries = [];
+  let data = {
+    remainingCalories: 1700,
+    totalCaloriesUsed: 0,
+    entries: []
+  };
 
-// Retrieve data from local storage
-const storedData = localStorage.getItem("calorie-counter-data");
-if (storedData) {
-  const { remainingCalories: storedRemainingCalories, totalCaloriesUsed: storedTotalCaloriesUsed, entries: storedEntries } = JSON.parse(storedData);
-  remainingCalories = storedRemainingCalories;
-  totalCaloriesUsed = storedTotalCaloriesUsed;
-  entries = storedEntries;
-  renderEntryList();
-  remainingCaloriesElement.textContent = remainingCalories;
-  totalCaloriesUsedElement.textContent = totalCaloriesUsed;
-}
+  function addEntry() {
+    const name = nameInput.value.trim();
+    const calorieAmount = parseInt(calorieAmountInput.value.trim());
 
-calorieAmountInput.addEventListener("keypress", (event) => {
-  if (event.key === "Enter" && nameInput.value.trim() !== "" && calorieAmountInput.value.trim() !== "") {
-    addEntry();
-  }
-});
-
-addEntryButton.addEventListener("click", addEntry);
-
-function addEntry() {
-  const name = nameInput.value.trim();
-  const calorieAmount = parseInt(calorieAmountInput.value.trim());
-  if (name && !isNaN(calorieAmount)) {
-    remainingCalories -= calorieAmount;
-    totalCaloriesUsed += calorieAmount;
-    remainingCaloriesElement.textContent = remainingCalories;
-    totalCaloriesUsedElement.textContent = totalCaloriesUsed;
-    const entryHTML = `
-      <tr>
-        <td>${name} - ${calorieAmount}</td>
-        <td><button class="btn btn-danger delete-button">Delete</button></td>
-      </tr>
-    `;
-    entryListElement.insertAdjacentHTML("beforeend", entryHTML);
-    entries.push({ name, calorieAmount });
-    // Save data to local storage
-    const dataToSave = { remainingCalories, totalCaloriesUsed, entries };
-    const jsonData = JSON.stringify(dataToSave);
-    localStorage.setItem("calorie-counter-data", jsonData);
-    // Clear both fields only if the entry is successfully added
-    nameInput.value = "";
-    calorieAmountInput.value = "";
-  }
-}
-
-entryListElement.addEventListener("click", (event) => {
-  if (event.target.classList.contains("delete-button")) {
-    const rowElement = event.target.parentNode.parentNode;
-    const entryName = rowElement.cells[0].textContent;
-    const [name, calorieAmount] = entryName.split(" - ");
-    const index = entries.findIndex((entry) => entry.name === name && entry.calorieAmount === parseInt(calorieAmount));
-    if (index > -1) {
-      const entry = entries.splice(index, 1)[0];
-      remainingCalories += entry.calorieAmount;
-      totalCaloriesUsed -= entry.calorieAmount;
-      remainingCaloriesElement.textContent = remainingCalories;
-      totalCaloriesUsedElement.textContent = totalCaloriesUsed;
-      rowElement.remove();
-      // Save updated data to local storage
-      const dataToSave = { remainingCalories, totalCaloriesUsed, entries };
-      const jsonData = JSON.stringify(dataToSave);
-      localStorage.setItem("calorie-counter-data", jsonData);
+    if (name && !isNaN(calorieAmount)) {
+      data.remainingCalories -= calorieAmount;
+      data.totalCaloriesUsed += calorieAmount;
+      data.entries.push({ name, calorieAmount });
+      saveData();
+      renderEntryList();
+      nameInput.value = "";
+      calorieAmountInput.value = "";
+    } else {
+      alert("Please fill in both fields.");
     }
   }
-});
 
-resetButton.addEventListener("click", () => {
-  remainingCalories = 1700;
-  totalCaloriesUsed = 0;
-  entries = [];
-  remainingCaloriesElement.textContent = remainingCalories;
-  totalCaloriesUsedElement.textContent = totalCaloriesUsed;
-  entryListElement.innerHTML = ""; // Clear entry list
-  localStorage.removeItem("calorie-counter-data"); // Remove data from local storage
-});
+  addEntryButton.addEventListener("click", addEntry);
 
-function renderEntryList() {
-  entryListElement.innerHTML = "";
-  entries.forEach((entry) => {
-    const entryHTML = `
-      <tr>
-        <td>${entry.name} - ${entry.calorieAmount}</td>
-        <td><button class="btn btn-danger delete-button">Delete</button></td>
-      </tr>
-    `;
-    entryListElement.insertAdjacentHTML("beforeend", entryHTML);
+  nameInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
   });
-}
+
+  calorieAmountInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  });
+
+  entryListElement.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-button")) {
+      const rowElement = event.target.parentNode.parentNode;
+      const entryName = rowElement.cells[0].textContent;
+      const [name, calorieAmount] = entryName.split(" - ");
+      const index = data.entries.findIndex((entry) => entry.name === name && entry.calorieAmount === parseInt(calorieAmount));
+      if (index > -1) {
+        data.entries.splice(index, 1);
+        data.remainingCalories += parseInt(calorieAmount);
+        data.totalCaloriesUsed -= parseInt(calorieAmount);
+        saveData();
+        renderEntryList();
+        rowElement.remove();
+      }
+    }
+  });
+
+  resetButton.addEventListener("click", () => {
+    data = {
+      remainingCalories: 1700,
+      totalCaloriesUsed: 0,
+      entries: []
+    };
+    saveData();
+    renderEntryList();
+    entryListElement.innerHTML = ""; // Clear entry list
+  });
+
+  function renderEntryList() {
+    entryListElement.innerHTML = "";
+    data.entries.forEach((entry) => {
+      const entryHTML = `
+        <tr>
+          <td>${entry.name} - ${entry.calorieAmount}</td>
+          <td><button class="btn btn-danger delete-button">Delete</button></td>
+        </tr>
+      `;
+      entryListElement.insertAdjacentHTML("beforeend", entryHTML);
+    });
+    remainingCaloriesElement.textContent = data.remainingCalories;
+    totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
+  }
+
+  function saveData() {
+    const jsonData = JSON.stringify(data);
+    localStorage.setItem("calorie-counter-data", jsonData);
+  }
+
+  // Retrieve data from local storage
+  const storedData = localStorage.getItem("calorie-counter-data");
+  if (storedData) {
+    data = JSON.parse(storedData);
+    renderEntryList();
+  }
+});
