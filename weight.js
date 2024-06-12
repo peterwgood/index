@@ -1,8 +1,8 @@
 function saveData() {
-  const date = new Date(document.getElementById("date").value + "T00:00:00"); // Add "T00:00:00" to specify the timezone offset
+  const date = new Date(document.getElementById("date").value + "T00:00:00"); 
   const weight = parseFloat(document.getElementById("weight").value);
   const log = document.getElementById("log");
-  const entry = `<p>${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></p>`;
+  const entry = `<div class="log-entry border p-2 mb-2"> ${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></div>`;
   const storedData = localStorage.getItem("weightData");
   if (storedData === null) {
     localStorage.setItem("weightData", entry);
@@ -47,5 +47,5 @@ function formatDate(date) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${month}/${day}/${year}`; // Return date in MM/DD/YYYY format
+  return `${month}/${day}/${year}`; 
 }
