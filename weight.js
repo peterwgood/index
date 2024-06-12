@@ -2,7 +2,7 @@ function saveData() {
   const date = new Date(document.getElementById("date").value + "T00:00:00"); 
   const weight = parseFloat(document.getElementById("weight").value);
   const log = document.getElementById("log");
-  const entry = `<div class="log-entry border p-2 mb-2"> ${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></div>`;
+  const entry = `<div class="log-entry p-2 mb-2"> ${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></div>`;
   const storedData = localStorage.getItem("weightData");
   if (storedData === null) {
     localStorage.setItem("weightData", entry);
