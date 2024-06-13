@@ -1,7 +1,12 @@
 body {
    font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
+    font-size: 2rem;
+    font-weight: 700;
 }
+
+
+
 .calorie-counter {
     max-width: 400px;
     margin: 40px auto;
