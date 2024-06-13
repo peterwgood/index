@@ -1,7 +1,7 @@
 body {
    font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
-    font-size: 2rem;
+    
     font-weight: 700;
 }
 
@@ -33,4 +33,11 @@ body {
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.nav-link {
+    
+    font-size: 3rem
+    
 }
