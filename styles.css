@@ -1,5 +1,6 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+   font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
 }
 .calorie-counter {
     max-width: 400px;
