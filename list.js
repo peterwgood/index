@@ -1,6 +1,8 @@
+// JavaScript Document
+
 // Initialize the to-do list and list name
-let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
-let listName = localStorage.getItem('listName') || 'List';
+let toDoList = [];
+let listName = 'List';
 
 // Add event listeners for the add item button and input field
 document.getElementById('add-item').addEventListener('click', addItem);
@@ -29,16 +31,13 @@ function updateList() {
     return `
       <li class="list-group-item" data-index="${index}">
         <span>${item}</span>
-        <button class="delete btn btn-sm btn-danger" onclick="deleteItem(${index})">Delete</button>
-        
+        <button class="delete btn btn-sm btn-danger" onclick="deleteItem(${index})"><i class="fa-solid fa-trash"></i></button>
+        <button class="edit btn btn-sm btn-secondary" onclick="editItem(${index})"><i class="fas fa-edit"></i></button>
       </li>
     `;
   }).join('');
   
   document.getElementById('to-do-list').innerHTML = listHTML;
-  
-  // Store the list items in local storage
-  localStorage.setItem('toDoList', JSON.stringify(toDoList));
   
   // Make the list sortable
   $('#to-do-list').sortable({
@@ -105,7 +104,6 @@ function renameList() {
       const newListName = editInput.value.trim();
       listName = newListName;
       listNameSpan.textContent = listName;
-      localStorage.setItem('listName', listName);
     }
   });
   
@@ -118,14 +116,4 @@ function renameList() {
 function resetList() {
   toDoList = [];
   updateList();
-  localStorage.removeItem('toDoList');
 }
-
-// Load the list items from local storage when the page is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  const storedList = localStorage.getItem('toDoList');
-  if (storedList) {
-    toDoList = JSON.parse(storedList);
-    updateList();
-  }
-});
