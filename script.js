@@ -46,6 +46,18 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   });
 
+  calorieAmountInput.addEventListener("focus", (event) => {
+    if (event.target.type === "text") {
+      event.target.type = "number";
+    }
+  });
+
+  calorieAmountInput.addEventListener("blur", (event) => {
+    if (event.target.type === "number") {
+      event.target.type = "text";
+    }
+  });
+
   calorieAmountInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -97,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function(){
      
       li.style.padding = "5px 10px 10px 10px"; // Add padding
      
-	
    
       const entryHTML = `
         <span>${entry.name} - ${entry.calorieAmount}</span>
