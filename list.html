@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -32,14 +33,13 @@
   </div>
 </nav>
 <div class="container mt-4">
- 
-  <h1 class="text-center mt-4"> <span id="list-name">To-do</span> <span id="rename-list"> </span> </h1>
-  <div class="input-group mb-4">
+  <h1 class="text-center mt-4">To-do</h1>
+  <span id="rename-list" class=""> </span>
+  <div class="input-group mb-3">
     <input id="new-item" type="text" placeholder="Add new item"  class="form-control">
     <button id="add-item" class="btn btn-primary">Add</button>
   </div>
-  <button id="reset-list" class="btn btn-danger btn-sm" onclick="resetList()">Reset</button>
-  <div class="mb-2"></div>
+  <button id="reset-list" class="btn btn-danger btn-sm mb-2" onclick="resetList()">Reset</button>
   <ul id="to-do-list" class="list-group">
     <!-- items will be listed here -->
   </ul>
