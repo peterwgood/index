@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   entryListElement.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-button")) {
-      const entryElement = event.target.parentNode.parentNode;
+      const entryElement = event.target.closest("li");
       const entryName = entryElement.querySelector("span").textContent;
       const [name, calorieAmount] = entryName.split(" - ");
       const index = data.entries.findIndex((entry) => entry.name === name && entry.calorieAmount === parseInt(calorieAmount));
