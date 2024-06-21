@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-
 </head>
 <body>
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -34,20 +33,25 @@
   </div>
 </nav>
 <div class="container mt-4">
-	<h1 class="text-center mt-4"> <span id="list-name">To-do</span></h1>
- 
-  <div class="input-group mb-3">
-    <input id="new-item" type="text" placeholder="Add new item"  class="form-control">
-    <button id="add-item" class="btn btn-primary">Add</button> 
+		<h1 class="text-center mb-4">Weekly Totals</h1>
+		<form id="calorie-form" class="row g-3">
+
+  <div class="mb-3">
+    
+    <input type="date" class="form-control" id="date" value="Date">
   </div>
-  <button id="reset-list" class="btn btn-danger btn-sm mb-2" onclick="resetList()">Reset</button>&nbsp;&nbsp;<button id="rename-list" class="btn btn-secondary btn-sm mb-2">Rename</button>
-  <ul id="to-do-list" class="list-group">
-    <!-- items will be listed here -->
-  </ul>
-</div>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
-<script src="list.js"></script> 
+  <div class="mb-3">
+    
+    <div class="input-group">
+      <input type="number" class="form-control" id="calories" placeholder="Enter daily calories">
+      <button id="add-calories" class="btn btn-primary btn-sm">Add</button>
+    </div>
+  </div>
+</form>
+		<div id="calorie-log" class="mt-4"></div>
+	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="yearly.js"></script>
 </body>
 </html>

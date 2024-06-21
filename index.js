@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
   const [name, setName] = React.useState('');
@@ -9,12 +10,16 @@ const App = () => {
   const [totalCaloriesUsed, setTotalCaloriesUsed] = React.useState(0);
 
   const addEntry = () => {
-    const newEntry = { name, calorieAmount };
+    const newEntry = { id: uuidv4(), name, calorieAmount };
     setEntries([...entries, newEntry]);
     setRemainingCalories(remainingCalories - calorieAmount);
     setTotalCaloriesUsed(totalCaloriesUsed + calorieAmount);
     setName('');
     setCalorieAmount(0);
+  };
+
+  const deleteEntry = (id) => {
+    setEntries(entries.filter((entry) => entry.id !== id));
   };
 
   return (
@@ -36,9 +41,10 @@ const App = () => {
         <button onClick={addEntry}>Add Entry</button>
       </form>
       <ul>
-        {entries.map((entry, index) => (
-          <li key={index}>
+        {entries.map((entry) => (
+          <li key={entry.id}>
             <span>{entry.name} - {entry.calorieAmount}</span>
+            <button onClick={() => deleteEntry(entry.id)}>Delete</button>
           </li>
         ))}
       </ul>
