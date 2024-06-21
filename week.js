@@ -3,9 +3,11 @@ const addBtn = document.getElementById('add-btn');
 const resetBtn = document.getElementById('reset-btn');
 const calorieList = document.getElementById('calorie-list');
 const totalCalories = document.getElementById('total-calories');
+const weeklyTotal = document.getElementById('weekly-total');
 
 let calories = 11900;
 let entries = [];
+let totalConsumed = 0;
 
 const storage = window.localStorage;
 
@@ -14,6 +16,7 @@ const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat
 // Retrieve data from local storage
 const storedEntries = JSON.parse(storage.getItem('entries'));
 const storedCalories = parseInt(storage.getItem('calories'));
+const storedTotalConsumed = parseInt(storage.getItem('totalConsumed'));
 
 if (storedEntries) {
   entries = storedEntries;
@@ -22,6 +25,10 @@ if (storedEntries) {
 if (storedCalories) {
   calories = storedCalories;
   updateTotal();
+}
+if (storedTotalConsumed) {
+  totalConsumed = storedTotalConsumed;
+  updateWeeklyTotal();
 }
 
 addBtn.addEventListener('click', addCalorie);
@@ -38,10 +45,13 @@ function addCalorie() {
   if (calorieAmount && entries.length < 7) {
     entries.push(calorieAmount);
     calories -= calorieAmount;
+    totalConsumed += calorieAmount;
     updateList();
     updateTotal();
+    updateWeeklyTotal();
     storage.setItem('entries', JSON.stringify(entries));
     storage.setItem('calories', calories);
+    storage.setItem('totalConsumed', totalConsumed);
     calorieInput.value = '';
   }
 }
@@ -49,10 +59,13 @@ function addCalorie() {
 function resetCalories() {
   calories = 11900;
   entries = [];
+  totalConsumed = 0;
   storage.removeItem('entries');
   storage.removeItem('calories');
+  storage.removeItem('totalConsumed');
   updateList();
   updateTotal();
+  updateWeeklyTotal();
 }
 
 function updateList() {
@@ -71,14 +84,21 @@ function updateTotal() {
   totalCalories.textContent = `Remaining Calories: ${calories}`;
 }
 
+function updateWeeklyTotal() {
+  weeklyTotal.textContent = `Total Calories Consumed: ${totalConsumed}`;
+}
+
 calorieList.addEventListener('click', (event) => {
   if (event.target.classList.contains('delete-btn')) {
     const index = event.target.dataset.index;
     const deletedAmount = entries.splice(index, 1)[0];
     calories += deletedAmount; 
+    totalConsumed -= deletedAmount;
     updateList();
     updateTotal();
+    updateWeeklyTotal();
     storage.setItem('entries', JSON.stringify(entries));
     storage.setItem('calories', calories);
+    storage.setItem('totalConsumed', totalConsumed);
   }
 });
