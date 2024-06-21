@@ -25,7 +25,7 @@
           <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Home</a> </li>
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-			<li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="list.html">To-do</a> </li>
         </ul>
       </div>
@@ -33,26 +33,22 @@
   </div>
 </nav>
 <div class="container mt-4">
-		<h1 class="text-center mb-4">Weekly Totals</h1>
-		<form id="calorie-form" class="row g-3">
-
-  <div class="mb-3">
-    
-    <input type="date" class="form-control" id="date" value="Date">
-	
-  </div>
-  <div class="mb-3">
-    
-    <div class="input-group">
-      <input type="number" class="form-control" id="calories" placeholder="Enter weekly calories">
-      <button id="add-calories" class="btn btn-primary btn-sm">Add</button>
+  <h1 class="text-center mb-4">Weekly Totals</h1>
+  <form id="calorie-form" class="row g-3">
+    <div class="mb-3">
+      <input type="date" class="form-control" id="date" value="Date">
     </div>
-  </div>
-</form>
-		<div id="calorie-log" class="mt-4"></div>
-	</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="yearly.js"></script>
+    <div class="mb-3">
+      <div class="input-group">
+        <input type="number" class="form-control" id="calories" placeholder="Enter weekly calories">
+        <button id="add-calories" class="btn btn-primary btn-sm">Add</button>
+      </div>
+    </div>
+  </form>
+  <div id="calorie-log" class="mt-4"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="yearly.js"></script>
 </body>
 </html>

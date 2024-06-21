@@ -25,7 +25,7 @@
           <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Home</a> </li>
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-			<li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="list.html">To-do</a> </li>
         </ul>
       </div>
@@ -41,15 +41,14 @@
   </div>
   <form>
     <div class="mb-3">
-     
       <input type="text" class="form-control" id="name" placeholder="Food" />
     </div>
     <div class="mb-3">
-     
-       <input type="number" class="form-control" id="calorie-amount" placeholder="Calorie amount"  />
-    </div>
-    <button id="add-entry" type="button" class="btn btn-primary btn-sm">Add Entry</button>
-    <button id="reset-button" class="btn btn-danger btn-sm">Reset</button>
+		 <div class="input-group">
+      <input type="number" class="form-control" id="calorie-amount" placeholder="Calorie amount"  />
+    
+			 <button id="add-entry" type="button" class="btn btn-primary btn-sm">Add Entry</button></div>
+		<button id="reset-button" class="btn btn-danger btn-sm mt-2">Reset</button></div>
     <p id="result" class="text-center"></p>
     <div id="entry-list"> 
       <!-- List items will be rendered here --> 

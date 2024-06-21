@@ -25,31 +25,31 @@
           <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Home</a> </li>
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-			<li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="list.html">To-do</a> </li>
         </ul>
       </div>
     </div>
   </div>
 </nav>
-  <div class="container mt-4">
-    <h1 class="text-center mt-4">Weight Tracker</h1>
-    <form>
-      <div class="mb-3">
-        
-        <input type="date" class="form-control" id="date" value="Date">
-      </div>
-      <div class="mb-3">
-        
-        <input type="number" class="form-control" id="weight" step="0.1" inputmode="decimal" placeholder="Weight (lbs)" >
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="saveData()">Save</button>
-      <button class="btn btn-danger btn-sm" onclick="resetData()">Reset</button>
-    </form>
-    <div class="mb-2"></div>
-    <div id="log"></div>
-  </div>
-  <script src="weight.js"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<div class="container mt-4">
+  <h1 class="text-center mt-4">Weight Tracker</h1>
+  <form>
+    <div class="mb-3">
+      <input type="date" class="form-control" id="date" value="Date">
+    </div>
+    <div class="mb-3">
+		 <div class="input-group">
+      <input type="number" class="form-control" id="weight" step="0.1" inputmode="decimal" placeholder="Weight (lbs)" >
+		
+    <button class="btn btn-primary btn-sm" onclick="saveData()">Save</button></div>
+    <button class="btn btn-danger btn-sm mt-2" onclick="resetData()">Reset</button>
+	  </div>
+  </form>
+  <div class="mb-2"></div>
+  <div id="log"></div>
+</div>
+<script src="weight.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

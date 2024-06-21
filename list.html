@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-
 </head>
 <body>
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -26,7 +25,7 @@
           <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Home</a> </li>
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-			<li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="list.html">To-do</a> </li>
         </ul>
       </div>
@@ -34,13 +33,14 @@
   </div>
 </nav>
 <div class="container mt-4">
-	<h1 class="text-center mt-4"> <span id="list-name">To-do</span></h1>
- 
+  <h1 class="text-center mt-4"> <span id="list-name">To-do</span></h1>
   <div class="input-group mb-3">
     <input id="new-item" type="text" placeholder="Add new item"  class="form-control">
-    <button id="add-item" class="btn btn-primary">Add</button> 
+    <button id="add-item" class="btn btn-primary">Add</button>
   </div>
-  <button id="reset-list" class="btn btn-danger btn-sm mb-2" onclick="resetList()">Reset</button>&nbsp;&nbsp;<button id="rename-list" class="btn btn-secondary btn-sm mb-2">Rename</button>
+  <button id="reset-list" class="btn btn-danger btn-sm mb-2" onclick="resetList()">Reset</button>
+  &nbsp;&nbsp;
+  <button id="rename-list" class="btn btn-secondary btn-sm mb-2">Rename</button>
   <ul id="to-do-list" class="list-group">
     <!-- items will be listed here -->
   </ul>
