@@ -71,7 +71,7 @@ function resetCalories() {
 function updateList() {
   const listHtml = entries.map((entry, index) => {
     return `
-      <li class="list-group-item border border-0">
+      <li class="my-1">
         ${daysOfWeek[index]}: -${entry} calories
         <button class="delete-btn btn btn-danger btn-sm" data-index="${index}">Delete</button>
       </li>

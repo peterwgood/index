@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function(){
     data.entries.forEach((entry) => {
       const li = document.createElement("LI");
      
-      li.style.padding = "5px 10px 10px 10px"; // Add padding
+      li.style.padding = "5px 0px 10px 0px"; // Add padding
      
    
       const entryHTML = `
