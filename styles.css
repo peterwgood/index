@@ -6,7 +6,12 @@ body {
   background-color: darkblue;
 }
 
-
+.list-group-item {
+    
+    
+    background-color: transparent;
+    color: #fff;
+}
 
 .calorie-counter {
     max-width: 400px;
