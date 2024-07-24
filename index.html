@@ -25,34 +25,61 @@
           <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Day</a> </li>
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
-			   <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
         </ul>
       </div>
     </div>
   </div>
 </nav>
 <div class="container mt-4">
-    <h1 class="text-center mt-4">Daily Calories</h1>
+  <h1 class="text-center mt-4">Daily Calories</h1>
   <form>
-    <div class="mb-3">
+    <div class="mb-3 visually-hidden">
       <input type="text" class="form-control" id="name" placeholder="Food" />
     </div>
     <div class="mb-3">
-		 <div class="input-group">
-      <input type="number" class="form-control" id="calorie-amount" placeholder="Calorie amount"  />
-    
-			 <button id="add-entry" type="button" class="btn btn-primary">Add</button></div>
-		<span id="reset-button" class="visually-hidden"></span></div>
+      <div class="input-group visually-hidden">
+        <input type="number" class="form-control" id="calorie-amount" placeholder="Calorie amount"  />
+        <button id="add-entry" type="button" class="btn btn-primary">Add</button>
+      </div>
+      <span id="reset-button" class="visually-hidden"></span></div>
     <p id="result" class="text-center"></p>
     <div id="entry-list"> 
       <!-- List items will be rendered here --> 
     </div>
-	  <div id="remaining-calories">
-    <div class=" mt-4 fw-bold fs-4"> Remaining Calories: <span id="remaining-calories-value">1700</span> </div>
-  </div>
-  <div id="total-calories-used" >
-    <div class=" mt-4 fw-bold fs-4"> Calories Used: <span id="total-calories-used-value">0</span> </div>
-  </div>
+    <div id="remaining-calories">
+      <div class=" mt-4 fw-bold fs-4"> Remaining Calories: <span id="remaining-calories-value">1700</span> </div>
+    </div>
+    <div id="total-calories-used" >
+      <div class=" mt-4 fw-bold fs-4"> Calories Used: <span id="total-calories-used-value">0</span> </div>
+    </div>
+    <div class="mt-4">
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Coffee" data-calories="160">Coffee (160 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Coffee" data-calories="80">Coffee (80 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="500">Food (500 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="440">Food (440 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="1000">Food (1000 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="400">Food (400 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-buttonm-1 " data-name="Food" data-calories="100">Food (100 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="80">Food (80 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="50">Food (50 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="20">Food (20 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Food" data-calories="10">Food (10 Cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Black Beans" data-calories="440">Black Beans (440 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Chick-fil-A Chicken Sandwich" data-calories="440">Chick-fil-A Chicken Sandwich (440 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Chick-fil-A Waffle Fries" data-calories="440">Chick-fil-A Waffle Fries (440 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="Chick-fil-A Sweet Tea" data-calories="320">Chick-fil-A Milk Shake (320 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="McDonald's Big Mac" data-calories="550">McDonald's Big Mac (550 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="McDonald's Cheeseburger" data-calories="300">McDonald's Cheeseburger (300 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="McDonald's Fries" data-calories="230">McDonald's Fries (230 cal)</button>
+      <button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="McDonald's Coke" data-calories="140">McDonald's Coke (140 cal)</button>
+		<button type="button" class="btn btn-secondary add-calorie-button m-1" data-name="McDonald's Coke" data-calories="600">Corona (600 cal)</button>
+      <button type="button" class="btn btn-success add-calorie-button m-1" data-name="Calories Burnt" data-calories="-300">Calories Burnt (300 cal)</button>
+		  <button type="button" class="btn btn-success add-calorie-button m-1" data-name="Calories Burnt" data-calories="-200">Calories Burnt (200 cal)</button>
+      <button type="button" class="btn btn-success add-calorie-button m-1" data-name="Calories Burnt" data-calories="-100">Calories Burnt (100 cal)</button>
+      <button type="button" class="btn btn-success add-calorie-button m-1" data-name="Calories Burnt" data-calories="-20">Calories Burnt (20 cal)</button>
+      <button type="button" class="btn btn-success add-calorie-button m-1" data-name="Calories Burnt" data-calories="-10">Calories Burnt (10 cal)</button>
+    </div>
   </form>
 </div>
 <script src="script.js"></script> 

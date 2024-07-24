@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const remainingCaloriesElement = document.getElementById("remaining-calories-value");
   const totalCaloriesUsedElement = document.getElementById("total-calories-used-value");
   const resetButton = document.getElementById("reset-button");
+  const addCalorieButtons = document.querySelectorAll(".add-calorie-button");
 
   let data = {
     remainingCalories: 1700,
@@ -13,10 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
     entries: []
   };
 
-  function addEntry() {
-    const name = nameInput.value.trim();
-    const calorieAmount = parseInt(calorieAmountInput.value.trim());
-
+  function addEntry(name, calorieAmount) {
     if (name !== "" && !isNaN(calorieAmount)) {
       data.remainingCalories -= calorieAmount;
       data.totalCaloriesUsed += calorieAmount;
@@ -30,19 +28,26 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   }
 
-  addEntryButton.addEventListener("click", addEntry);
+  addEntryButton.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    const calorieAmount = parseInt(calorieAmountInput.value.trim());
+    addEntry(name, calorieAmount);
+  });
+
+  addCalorieButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const name = button.getAttribute("data-name");
+      const calories = parseInt(button.getAttribute("data-calories"));
+      addEntry(name, calories);
+    });
+  });
 
   nameInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const name = nameInput.value.trim();
       const calorieAmount = parseInt(calorieAmountInput.value.trim());
-
-      if (name !== "" && !isNaN(calorieAmount)) {
-        addEntry();
-      } else {
-        alert("Please enter a valid name and calorie amount.");
-      }
+      addEntry(name, calorieAmount);
     }
   });
 
@@ -63,12 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
       event.preventDefault();
       const name = nameInput.value.trim();
       const calorieAmount = parseInt(calorieAmountInput.value.trim());
-
-      if (name !== "" && !isNaN(calorieAmount)) {
-        addEntry();
-      } else {
-        alert("Please enter a valid name and calorie amount.");
-      }
+      addEntry(name, calorieAmount);
     }
   });
 
@@ -106,10 +106,7 @@ document.addEventListener("DOMContentLoaded", function(){
     ul.className = "list-unstyled"; // Remove bullet points
     data.entries.forEach((entry) => {
       const li = document.createElement("LI");
-     
       li.style.padding = "5px 0px 10px 0px"; // Add padding
-     
-   
       const entryHTML = `
         <span>${entry.name} - ${entry.calorieAmount}</span>
         <button class="btn btn-danger btn-sm delete-button">Delete</button>
