@@ -32,22 +32,23 @@
   </div>
 </nav>
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Weekly Totals</h1>
-  <form id="calorie-form" class="row g-3">
+  <h1 class="text-center mt-4">Total Weeks Calories</h1>
+  <form>
     <div class="mb-3">
       <input type="date" class="form-control" id="date" value="Date">
     </div>
     <div class="mb-3">
-      <div class="input-group">
-        <input type="number" class="form-control" id="calories" placeholder="Enter weekly calories">
-        <button id="add-calories" class="btn btn-primary">Add</button>
-      </div>
-    </div>
+		 <div class="input-group">
+      <input type="number" class="form-control" id="weight" step="0.1" inputmode="decimal" placeholder="Calories" >
+		
+    <button class="btn btn-primary" onclick="saveData()">Add</button></div>
+   <!-- <button class="btn btn-danger btn-sm mt-2" onclick="resetData()">Reset</button>-->
+	  </div>
   </form>
-  <ul id="calorie-log" class="list-group mt-1"></ul>
+  <div class="mb-2"></div>
+  <ul id="log" class="list-group"></ul>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script src="yearly.js"></script>
+<script src="yearly.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
