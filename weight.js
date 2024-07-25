@@ -2,7 +2,7 @@ function saveData() {
   const date = new Date(document.getElementById("date").value + "T00:00:00"); 
   const weight = parseFloat(document.getElementById("weight").value);
   const log = document.getElementById("log");
-  const entry = `<div class="log-entry p-0 mb-3"> ${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></div>`;
+  const entry = `<li class="list-group-item d-flex justify-content-between align-items-center"> ${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></li>`;
   const storedData = localStorage.getItem("weightData");
   if (storedData === null) {
     localStorage.setItem("weightData", entry);
@@ -11,6 +11,7 @@ function saveData() {
   }
   log.insertAdjacentHTML("afterbegin", entry);
 }
+
 
 // Display existing log entries on page load
 document.addEventListener("DOMContentLoaded", function() {
