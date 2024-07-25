@@ -100,24 +100,26 @@ document.addEventListener("DOMContentLoaded", function(){
     entryListElement.innerHTML = ""; // Clear entry list
   });
 
-  function renderEntryList() {
-    entryListElement.innerHTML = "";
-    const ul = document.createElement("UL");
-    ul.className = "list-unstyled"; // Remove bullet points
-    data.entries.forEach((entry) => {
-      const li = document.createElement("LI");
-      li.style.padding = "5px 0px 10px 0px"; // Add padding
-      const entryHTML = `
-        <span>${entry.name} - ${entry.calorieAmount}</span>
-        <button class="btn btn-danger btn-sm delete-button">Delete</button>
-      `;
-      li.innerHTML = entryHTML;
-      ul.appendChild(li);
-    });
-    entryListElement.appendChild(ul);
-    remainingCaloriesElement.textContent = data.remainingCalories;
-    totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
-  }
+ function renderEntryList() {
+  entryListElement.innerHTML = "";
+  const ul = document.createElement("UL");
+  ul.className = "list-group"; // Use Bootstrap list group class
+  data.entries.forEach((entry) => {
+    const li = document.createElement("LI");
+    li.className = 'list-group-item d-flex justify-content-between align-items-center'; // Use Bootstrap classes
+    const entryHTML = `
+      <span>${entry.name} - ${entry.calorieAmount}</span>
+      <button class="btn btn-danger btn-sm delete-button">Delete</button>
+    `;
+    li.innerHTML = entryHTML;
+    ul.appendChild(li);
+  });
+  entryListElement.appendChild(ul);
+  remainingCaloriesElement.textContent = data.remainingCalories;
+  totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
+}
+
+
 
   function saveData() {
     const jsonData = JSON.stringify(data);
