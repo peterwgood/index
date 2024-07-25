@@ -71,7 +71,7 @@ function resetCalories() {
 function updateList() {
   const listHtml = entries.map((entry, index) => {
     return `
-      <li class="my-1">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
         ${daysOfWeek[index]}: -${entry} calories
         <button class="delete-btn btn btn-danger btn-sm" data-index="${index}">Delete</button>
       </li>
@@ -79,6 +79,7 @@ function updateList() {
   }).join('');
   calorieList.innerHTML = listHtml;
 }
+
 
 function updateTotal() {
   totalCalories.textContent = `Remaining Calories: ${calories}`;

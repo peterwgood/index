@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(){
     entryListElement.innerHTML = ""; // Clear entry list
   });
 
- function renderEntryList() {
+function renderEntryList() {
   entryListElement.innerHTML = "";
   const ul = document.createElement("UL");
   ul.className = "list-group"; // Use Bootstrap list group class
@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function(){
   remainingCaloriesElement.textContent = data.remainingCalories;
   totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
 }
+
 
 
 

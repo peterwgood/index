@@ -15,8 +15,9 @@ $(document).ready(function() {
   // Function to update the date field with the current date
   function updateDateField() {
     const today = new Date();
-    const formattedToday = `${today.getMonth() + 1}/${today.getUTCDate()}/${today.getFullYear()}`;
-    $('#date').val(formattedToday);
+    const timezoneOffset = today.getTimezoneOffset() * 60000;
+    const localISOTime = new Date(today - timezoneOffset).toISOString().slice(0,10);
+    $('#date').val(localISOTime);
   }
 
   // Set today's date in the input field when the page loads
@@ -42,18 +43,18 @@ $(document).ready(function() {
     calorieLog.html('');
     $.each(calorieData.sort((a, b) => new Date(b.date) - new Date(a.date)), function(index, entry) {
       const date = new Date(entry.date);
-      const formattedDate = `${date.getMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`;
+      const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
       const html = `
-        <div class="d-flex align-items-center">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
           <span>${formattedDate}</span>
-          <span>&emsp;&emsp;${entry.calories} calories</span>
-          <button class="delete-button btn btn-danger btn-sm ms-auto mb-2">Delete</button>
-        </div>
+          <span>  ${entry.calories} calories</span>
+          <button class="delete-button btn btn-danger btn-sm ">Delete</button>
+        </li>
       `;
       calorieLog.append(html);
-      const deleteButton = calorieLog.children('div').last().find('.delete-button');
+      const deleteButton = calorieLog.children('li').last().find('.delete-button');
       deleteButton.on('click', function() {
-        deleteEntry(entry);
+          deleteEntry(entry);
       });
     });
   }
