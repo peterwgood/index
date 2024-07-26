@@ -1,3 +1,5 @@
+let chart; // Define chart in the global scope
+
 function saveData() {
   const date = new Date(document.getElementById("date").value + "T00:00:00"); 
   const weight = parseFloat(document.getElementById("weight").value);
@@ -10,6 +12,7 @@ function saveData() {
     localStorage.setItem("weightData", entry + storedData);
   }
   log.insertAdjacentHTML("afterbegin", entry);
+  updateChart();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -17,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (storedData) {
     document.getElementById("log").innerHTML = storedData;
   }
+  createBarChart();
 });
 
 const now = new Date();
@@ -31,11 +35,13 @@ function deleteEntry(btn) {
   const storedData = localStorage.getItem("weightData");
   const newData = storedData.replace(entry.outerHTML, "");
   localStorage.setItem("weightData", newData);
+  updateChart();
 }
 
 function resetData() {
   localStorage.removeItem("weightData");
   document.getElementById("log").innerHTML = "";
+  updateChart();
 }
 
 function formatDate(date) {
@@ -44,3 +50,59 @@ function formatDate(date) {
   const day = date.getDate();
   return `${month}/${day}/${year}`; 
 }
+
+function createBarChart() {
+  const ctx = document.getElementById('BarChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [], // dynamic labels
+      datasets: [{
+        label: 'Weight',
+        data: [], // dynamic data
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Call updateChart initially to populate the chart
+  updateChart();
+}
+
+function updateChart() {
+  console.log('Updating chart...');
+  const storedData = localStorage.getItem("weightData");
+  if (storedData) {
+    const entries = storedData.match(/<li[^>]*>(.*?)<\/li>/g);
+    const labels = [];
+    const data = [];
+    entries.forEach((entry) => {
+      if (entry) {
+        const date = entry.match(/>(.*?):/)[1];
+        const weight = parseFloat(entry.match(/:(.*?) Calories/)[1]);
+        labels.push(date);
+        data.push(weight);
+      }
+    });
+    console.log('Labels:', labels);
+    console.log('Data:', data);
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = data;
+    chart.update();
+  }
+}
+
+// Update the chart when data changes
+document.getElementById("log").addEventListener("DOMSubtreeModified", () => {
+  console.log('Log updated...');
+  updateChart();
+});
