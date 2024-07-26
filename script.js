@@ -15,18 +15,19 @@ document.addEventListener("DOMContentLoaded", function(){
   };
 
   function addEntry(name, calorieAmount) {
-    if (name !== "" && !isNaN(calorieAmount)) {
-      data.remainingCalories -= calorieAmount;
-      data.totalCaloriesUsed += calorieAmount;
-      data.entries.push({ name, calorieAmount });
-      saveData();
-      renderEntryList();
-      nameInput.value = "";
-      calorieAmountInput.value = "";
-    } else {
-      alert("Please enter a valid name and calorie amount.");
-    }
+  if (name !== "" && !isNaN(calorieAmount)) {
+    data.remainingCalories -= calorieAmount;
+    data.totalCaloriesUsed += calorieAmount;
+    data.entries.push({ name, calorieAmount });
+    saveData();
+    renderEntryList();
+    renderCaloriesChart(); // Add this line to update the chart
+    nameInput.value = "";
+    calorieAmountInput.value = "";
+  } else {
+    alert("Please enter a valid name and calorie amount.");
   }
+}
 
   addEntryButton.addEventListener("click", () => {
     const name = nameInput.value.trim();
@@ -100,27 +101,55 @@ document.addEventListener("DOMContentLoaded", function(){
     entryListElement.innerHTML = ""; // Clear entry list
   });
 
-function renderEntryList() {
-  entryListElement.innerHTML = "";
-  const ul = document.createElement("UL");
-  ul.className = "list-group"; // Use Bootstrap list group class
-  data.entries.forEach((entry) => {
-    const li = document.createElement("LI");
-    li.className = 'list-group-item d-flex justify-content-between align-items-center'; // Use Bootstrap classes
-    const entryHTML = `
-      <span>${entry.name} - ${entry.calorieAmount}</span>
-      <button class="btn btn-danger btn-sm delete-button">Delete</button>
-    `;
-    li.innerHTML = entryHTML;
-    ul.appendChild(li);
-  });
-  entryListElement.appendChild(ul);
-  remainingCaloriesElement.textContent = data.remainingCalories;
-  totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
+  function renderEntryList() {
+    entryListElement.innerHTML = "";
+    const ul = document.createElement("UL");
+    ul.className = "list-group"; // Use Bootstrap list group class
+    data.entries.forEach((entry) => {
+      const li = document.createElement("LI");
+      li.className = 'list-group-item d-flex justify-content-between align-items-center'; // Use Bootstrap classes
+      const entryHTML = `
+        <span>${entry.name} - ${entry.calorieAmount}</span>
+        <button class="btn btn-danger btn-sm delete-button">Delete</button>
+      `;
+      li.innerHTML = entryHTML;
+      ul.appendChild(li);
+    });
+    entryListElement.appendChild(ul);
+    remainingCaloriesElement.textContent = data.remainingCalories;
+    totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
+    renderCaloriesChart();
+  }
+	
+	
+
+  let chart; // Declare chart variable outside the function
+
+function renderCaloriesChart() {
+  const ctx = document.getElementById('caloriesChart').getContext('2d');
+  if (!chart) { // Check if chart is not created
+    chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Calories Used', 'Remaining Calories'],
+        datasets: [{
+          data: [Math.min(data.totalCaloriesUsed, 1700), Math.max(data.remainingCalories, 0)],
+          backgroundColor: [data.totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  } else { // If chart is already created, update the data
+    chart.data.datasets[0].data = [Math.min(data.totalCaloriesUsed, 1700), Math.max(data.remainingCalories, 0)];
+    chart.data.datasets[0].backgroundColor = [data.totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
+    chart.update();
+  }
 }
-
-
-
+	
+	
 
   function saveData() {
     const jsonData = JSON.stringify(data);
