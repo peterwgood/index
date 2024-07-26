@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -33,11 +34,14 @@
 </nav>
 <div class="container mt-4">
   <h1 class="text-center mt-4">Weekly Calories</h1>
+	<div class="chart-container" style=" width:300px; height:300px; margin: 0 auto;">
+	<canvas id="PieChart"></canvas>
+		</div>
   <div class="input-group mb-3">
     <input type="number" id="calorie-input" placeholder="Enter calorie amount" class="form-control">
     <button id="add-btn" class="btn btn-primary">Add</button>
   </div>
-  <span id="reset-btn" class="visually-hidden">Reset</span>
+  <span id="reset-btn" class="btn btn-danger">Reset</span>
   <ul id="calorie-list" class="list-group mb-3">
     <!-- list items will be dynamically added here -->
   </ul>

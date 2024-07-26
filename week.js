@@ -4,6 +4,7 @@ const resetBtn = document.getElementById('reset-btn');
 const calorieList = document.getElementById('calorie-list');
 const totalCalories = document.getElementById('total-calories');
 const weeklyTotal = document.getElementById('weekly-total');
+const pieChartCanvas = document.getElementById('PieChart');
 
 let calories = 11900;
 let entries = [];
@@ -49,6 +50,7 @@ function addCalorie() {
     updateList();
     updateTotal();
     updateWeeklyTotal();
+    updatePieChart();
     storage.setItem('entries', JSON.stringify(entries));
     storage.setItem('calories', calories);
     storage.setItem('totalConsumed', totalConsumed);
@@ -66,6 +68,7 @@ function resetCalories() {
   updateList();
   updateTotal();
   updateWeeklyTotal();
+  updatePieChart();
 }
 
 function updateList() {
@@ -78,8 +81,24 @@ function updateList() {
     `;
   }).join('');
   calorieList.innerHTML = listHtml;
+  const deleteBtns = document.querySelectorAll('.delete-btn');
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener('click', deleteEntry);
+  });
 }
-
+function deleteEntry(event) {
+  const index = event.target.dataset.index;
+  const deletedAmount = entries.splice(index, 1)[0];
+  calories += deletedAmount; 
+  totalConsumed -= deletedAmount;
+  updateList();
+  updateTotal();
+  updateWeeklyTotal();
+  updatePieChart();
+  storage.setItem('entries', JSON.stringify(entries));
+  storage.setItem('calories', calories);
+  storage.setItem('totalConsumed', totalConsumed);
+}
 
 function updateTotal() {
   totalCalories.textContent = `Remaining Calories: ${calories}`;
@@ -89,17 +108,39 @@ function updateWeeklyTotal() {
   weeklyTotal.textContent = `Total Calories Consumed: ${totalConsumed}`;
 }
 
-calorieList.addEventListener('click', (event) => {
-  if (event.target.classList.contains('delete-btn')) {
-    const index = event.target.dataset.index;
-    const deletedAmount = entries.splice(index, 1)[0];
-    calories += deletedAmount; 
-    totalConsumed -= deletedAmount;
-    updateList();
-    updateTotal();
-    updateWeeklyTotal();
-    storage.setItem('entries', JSON.stringify(entries));
-    storage.setItem('calories', calories);
-    storage.setItem('totalConsumed', totalConsumed);
+function updatePieChart() {
+  if (window.chart) {
+    window.chart.destroy();
   }
-});
+  const ctx = pieChartCanvas.getContext('2d');
+  window.chart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Remaining Calories', 'Total Calories Consumed'],
+      datasets: [{
+        label: 'Calories',
+        data: [calories, totalConsumed],
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)'
+        ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+updatePieChart();
+
+updateList();
