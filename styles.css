@@ -6,6 +6,12 @@ body {
   /*! background-color: black; */
 }
 
+#calorie-chart {
+   max-width: 400px !important; */;
+  max-height: 400px !important; */;
+    margin: 0 auto;
+}
+
 .list-group-item {
     
     
