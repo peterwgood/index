@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const totalCaloriesUsedElement = document.getElementById("total-calories-used-value");
   const resetButton = document.getElementById("reset-button");
   const addCalorieButtons = document.querySelectorAll(".add-calorie-button");
+  const chartCanvas = document.getElementById('calorie-chart');
 
   let data = {
     remainingCalories: 1700,
@@ -14,19 +15,22 @@ document.addEventListener("DOMContentLoaded", function(){
     entries: []
   };
 
-  function addEntry(name, calorieAmount) {
-    if (name !== "" && !isNaN(calorieAmount)) {
-      data.remainingCalories -= calorieAmount;
-      data.totalCaloriesUsed += calorieAmount;
-      data.entries.push({ name, calorieAmount });
-      saveData();
-      renderEntryList();
-      nameInput.value = "";
-      calorieAmountInput.value = "";
-    } else {
-      alert("Please enter a valid name and calorie amount.");
-    }
+  let chart;
+
+ function addEntry(name, calorieAmount) {
+  if (name !== "" && !isNaN(calorieAmount)) {
+    data.remainingCalories -= calorieAmount;
+    data.totalCaloriesUsed += calorieAmount;
+    data.entries.push({ name, calorieAmount });
+    saveData();
+    renderEntryList(); // Update the entry list
+    updateChart(); // Update the chart
+    nameInput.value = "";
+    calorieAmountInput.value = "";
+  } else {
+    alert("Please enter a valid name and calorie amount.");
   }
+}
 
   addEntryButton.addEventListener("click", () => {
     const name = nameInput.value.trim();
@@ -83,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function(){
         data.remainingCalories += parseInt(calorieAmount);
         data.totalCaloriesUsed -= parseInt(calorieAmount);
         saveData();
-        renderEntryList();
+        updateChart();
         entryElement.remove();
       }
     }
@@ -96,9 +100,16 @@ document.addEventListener("DOMContentLoaded", function(){
       entries: []
     };
     saveData();
-    renderEntryList();
+    updateChart();
     entryListElement.innerHTML = ""; // Clear entry list
   });
+
+ 
+
+
+
+
+
 
 function renderEntryList() {
   entryListElement.innerHTML = "";
@@ -117,11 +128,43 @@ function renderEntryList() {
   entryListElement.appendChild(ul);
   remainingCaloriesElement.textContent = data.remainingCalories;
   totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
+
+  if (!chart) {
+    const chartData = {
+      labels: ['Total Calories Used', 'Remaining Calories'],
+      datasets: [{
+        label: 'Calories',
+        data: [Math.min(data.totalCaloriesUsed, 1700), Math.max(0, 1700 - data.totalCaloriesUsed)],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)', // Pink
+          'rgba(54, 162, 235, 0.2)', // Blue
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)', // Pink
+          'rgba(54, 162, 235, 1)', // Blue
+        ],
+        borderWidth: 1
+      }]
+    };
+    const chartOptions = {
+      title: {
+        display: true,
+        text: 'Calorie Breakdown'
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    };
+    chart = new Chart(chartCanvas, {
+      type: 'pie',
+      data: chartData,
+      options: chartOptions
+    });
+  } else {
+    chart.data.datasets[0].data[0] = Math.min(data.totalCaloriesUsed, 1700);
+    chart.data.datasets[0].data[1] = Math.max(0, 1700 - data.totalCaloriesUsed);
+    chart.update();
+  }
 }
-
-
-
-
   function saveData() {
     const jsonData = JSON.stringify(data);
     localStorage.setItem("calorie-counter-data", jsonData);
