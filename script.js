@@ -127,14 +127,23 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function renderCaloriesChart() {
   const ctx = document.getElementById('caloriesChart').getContext('2d');
+  let totalCaloriesUsed = data.totalCaloriesUsed;
+  let remainingCalories = data.remainingCalories;
+
+  // Check if totalCaloriesUsed is less than 0
+  if (totalCaloriesUsed < 0) {
+    totalCaloriesUsed = 0; // Set to initial value
+    remainingCalories = 1700; // Set to initial value
+  }
+
   if (!chart) { // Check if chart is not created
     chart = new Chart(ctx, {
       type: 'pie',
       data: {
         labels: ['Calories Used', 'Remaining Calories'],
         datasets: [{
-          data: [Math.min(data.totalCaloriesUsed, 1700), Math.max(data.remainingCalories, 0)],
-          backgroundColor: [data.totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6']
+          data: [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)],
+          backgroundColor: [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6']
         }]
       },
       options: {
@@ -143,11 +152,12 @@ function renderCaloriesChart() {
       }
     });
   } else { // If chart is already created, update the data
-    chart.data.datasets[0].data = [Math.min(data.totalCaloriesUsed, 1700), Math.max(data.remainingCalories, 0)];
-    chart.data.datasets[0].backgroundColor = [data.totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
+    chart.data.datasets[0].data = [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)];
+    chart.data.datasets[0].backgroundColor = [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
     chart.update();
   }
 }
+
 	
 	
 
