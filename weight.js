@@ -5,7 +5,8 @@ function saveData() {
   const date = new Date(document.getElementById("date").value + "T00:00:00"); 
   const weight = parseFloat(document.getElementById("weight").value);
   const log = document.getElementById("log");
-  const entry = `<li class="list-group-item d-flex justify-content-between align-items-center"> ${formatDate(date)}: ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></li>`;
+  const dayOfWeek = getDayOfWeek(date);
+  const entry = `<li class="list-group-item d-flex justify-content-between align-items-center"> ${formatDate(date)} (${dayOfWeek}): ${weight.toFixed(1)} lbs <button class="btn btn-danger btn-sm delete-btn" onclick="deleteEntry(this)">Delete</button></li>`;
   const storedData = localStorage.getItem("weightData2");
   if (storedData === null) {
     localStorage.setItem("weightData2", entry);
@@ -46,4 +47,9 @@ function formatDate(date) {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   return `${month}/${day}/${year}`; 
+}
+
+function getDayOfWeek(date) {
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  return days[date.getDay()];
 }
