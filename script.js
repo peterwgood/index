@@ -134,6 +134,10 @@ function renderCaloriesChart() {
   if (totalCaloriesUsed < 0) {
     totalCaloriesUsed = 0; // Set to initial value
     remainingCalories = 1700; // Set to initial value
+    // Change the entire pie chart to black
+    backgroundColor = ['#000', '#000'];
+  } else {
+    backgroundColor = [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
   }
 
   if (!chart) { // Check if chart is not created
@@ -143,7 +147,7 @@ function renderCaloriesChart() {
         labels: ['Calories Used', 'Remaining Calories'],
         datasets: [{
           data: [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)],
-          backgroundColor: [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6']
+          backgroundColor: backgroundColor
         }]
       },
       options: {
@@ -153,7 +157,7 @@ function renderCaloriesChart() {
     });
   } else { // If chart is already created, update the data
     chart.data.datasets[0].data = [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)];
-    chart.data.datasets[0].backgroundColor = [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
+    chart.data.datasets[0].backgroundColor = backgroundColor;
     chart.update();
   }
 }
