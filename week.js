@@ -116,17 +116,17 @@ function updatePieChart() {
   window.chart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: ['Remaining Calories', 'Total Calories Consumed'],
+      labels: ['Total Calories Consumed', 'Remaining Calories'], // Swap the labels
       datasets: [{
         label: 'Calories',
-        data: [calories, totalConsumed],
+        data: [totalConsumed, calories], // Swap the data
         backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 99, 132, 0.2)'
+          'rgba(255, 99, 132, 0.2)', // Swap the colors
+          'rgba(54, 162, 235, 0.2)'
         ],
         borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)'
+          'rgba(255, 99, 132, 1)', // Swap the colors
+          'rgba(54, 162, 235, 1)'
         ],
         borderWidth: 1
       }]
