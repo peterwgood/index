@@ -33,13 +33,13 @@ function generateButtons() {
     });
     // Add "Add New Button" button
     var addButton = document.createElement('button');
-    addButton.className = 'btn btn-primary';
-    addButton.textContent = 'Add New Button';
+    addButton.className = 'btn btn-primary m-1';
+    addButton.textContent = 'New';
     addButton.onclick = addNewButton;
     buttonsContainer.appendChild(addButton);
     // Add "Reset" button
     var resetButton = document.createElement('button');
-    resetButton.className = 'btn btn-danger mx-1';
+    resetButton.className = 'btn btn-danger m-1';
     resetButton.textContent = 'Reset';
     resetButton.onclick = function() {
         buttonLabels = [];
