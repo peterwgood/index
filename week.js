@@ -113,25 +113,23 @@ function updatePieChart() {
     window.chart.destroy();
   }
   const ctx = pieChartCanvas.getContext('2d');
+  const isOverLimit = totalConsumed > 11900;
+  const backgroundColor = isOverLimit ? ['red', 'red'] : ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'];
+  const borderColor = isOverLimit ? ['White', 'white'] : ['white', 'white'];
+  const borderWidth = isOverLimit ? 0 : 1;
+
   window.chart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: ['Total Calories Consumed', 'Remaining Calories'], // Swap the labels
+      labels: ['Total Calories Consumed', 'Remaining Calories'],
       datasets: [{
         label: 'Calories',
-        data: [totalConsumed, calories], // Swap the data
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)', // Swap the colors
-          'rgba(54, 162, 235, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)', // Swap the colors
-          'rgba(54, 162, 235, 1)'
-        ],
-        borderWidth: 1
+        data: [totalConsumed, calories],
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
+        borderWidth: borderWidth
       }]
     },
-  
   });
 }
 
