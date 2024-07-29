@@ -5,15 +5,6 @@ var selectedItems = [];
 var buttonLabels = [];
 
 // Function to generate buttons dynamically
-// ...
-
-// Function to generate buttons dynamically
-// ...
-
-// Function to generate buttons dynamically
-// ...
-
-// Function to generate buttons dynamically
 function generateButtons() {
     var buttonsContainer = document.getElementById('buttons');
     // Clear existing buttons
@@ -31,28 +22,7 @@ function generateButtons() {
         buttonContainer.appendChild(button);
         buttonsContainer.appendChild(buttonContainer);
     });
-    // Add "Add New Button" button
-    var addButton = document.createElement('button');
-    addButton.className = 'btn btn-primary m-1';
-    addButton.textContent = 'New';
-    addButton.onclick = addNewButton;
-    buttonsContainer.appendChild(addButton);
-    // Add "Reset" button
-    var resetButton = document.createElement('button');
-    resetButton.className = 'btn btn-danger m-1';
-    resetButton.textContent = 'Reset';
-    resetButton.onclick = function() {
-        buttonLabels = [];
-        saveButtonLabelsToLocalStorage();
-        generateButtons();
-    };
-    buttonsContainer.appendChild(resetButton);
 }
-
-// ...
-
-// Call the generateButtons function to create the buttons
-generateButtons();
 
 // Function to add an item to the log
 function addToLog(item) {
@@ -84,7 +54,7 @@ function updateLog() {
         li.className = 'list-group-item d-flex justify-content-between align-items-center';
         li.textContent = selectedItems[i];
         var deleteButton = document.createElement("button");
-        deleteButton.className = 'btn btn-danger';
+        deleteButton.className = 'btn btn-danger btn-sm';
         deleteButton.onclick = function(index) {
             return function() {
                 deleteItem(index);
@@ -130,14 +100,6 @@ window.onload = function() {
     generateButtons();
 }
 
-// Add event listener to input field to add item to log when Enter is pressed
-document.getElementById("new-item").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        addToLog(document.getElementById('new-item').value);
-        document.getElementById('new-item').value = '';
-    }
-});
-
 // Function to add a new button
 function addNewButton() {
     var newButtonLabel = prompt("Enter the label for the new button:");
@@ -148,12 +110,20 @@ function addNewButton() {
     }
 }
 
-// Function to remove a button
-function removeButtonLabel(label) {
-    var index = buttonLabels.indexOf(label);
-    if (index !== -1) {
-        buttonLabels.splice(index, 1);
-        saveButtonLabelsToLocalStorage();
-        generateButtons();
-    }
+// Function to reset buttons
+function resetButtons() {
+    buttonLabels = [];
+    saveButtonLabelsToLocalStorage();
+    generateButtons();
 }
+
+var inputField = document.getElementById('new-item');
+inputField.addEventListener('keypress', function(event) {
+    // Check if the Enter key was pressed
+    if (event.key === 'Enter') {
+        // Call the addToLog function with the input field value
+        addToLog(inputField.value);
+        // Clear the input field value
+        inputField.value = '';
+    }
+});
