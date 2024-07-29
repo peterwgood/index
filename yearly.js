@@ -58,9 +58,9 @@ function createBarChart() {
     data: {
       labels: [], // dynamic labels
       datasets: [{
-        label: 'Weight',
+        label: 'Calories',
         data: [], // dynamic data
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        backgroundColor: [], // dynamic background color
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1
       }]
@@ -68,7 +68,27 @@ function createBarChart() {
     options: {
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          max: 13000 // Adjust the max value as needed
+        }
+      },
+      plugins: {
+        annotation: {
+          annotations: {
+            line1: {
+              type: 'line',
+              yMin: 11900,
+              yMax: 11900,
+              borderColor: 'rgb(255, 0, 0)', // Red color for visibility
+              borderWidth: 5, // Increased thickness
+              label: {
+                content: 'Threshold',
+                enabled: true,
+                position: 'center',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)' // Background color for the label
+              }
+            }
+          }
         }
       }
     }
@@ -78,6 +98,8 @@ function createBarChart() {
   updateChart();
 }
 
+
+
 function updateChart() {
   console.log('Updating chart...');
   const storedData = localStorage.getItem("weightData");
@@ -85,18 +107,21 @@ function updateChart() {
     const entries = storedData.match(/<li[^>]*>(.*?)<\/li>/g);
     const labels = [];
     const data = [];
+    const backgroundColors = [];
     entries.forEach((entry) => {
       if (entry) {
         const date = entry.match(/>(.*?):/)[1];
         const weight = parseFloat(entry.match(/:(.*?) Calories/)[1]);
         labels.push(date);
         data.push(weight);
+        backgroundColors.push(weight > 11900 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(75, 192, 192, 0.2)');
       }
     });
     console.log('Labels:', labels);
     console.log('Data:', data);
     chart.data.labels = labels;
     chart.data.datasets[0].data = data;
+    chart.data.datasets[0].backgroundColor = backgroundColors;
     chart.update();
   }
 }
