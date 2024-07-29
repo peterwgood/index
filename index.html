@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -27,7 +27,7 @@
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-			<li class="nav-item"> <a class="nav-link" href="Boosters.html">Mood</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Boosters.html">Mood</a> </li>
         </ul>
       </div>
     </div>
@@ -35,9 +35,9 @@
 </nav>
 <div class="container mt-4">
   <h1 class="text-center mt-4">Daily Calories</h1>
-	<div class="chart-container" style=" width:300px; height:300px; margin: 0 auto;">
-	<canvas id="caloriesChart"></canvas>
-		</div>
+  <div class="chart-container" style=" width:300px; height:300px; margin: 0 auto;">
+    <canvas id="caloriesChart"></canvas>
+  </div>
   <form>
     <div class="mb-3 visually-hidden">
       <input type="text" class="form-control" id="name" placeholder="Food" />
@@ -47,16 +47,10 @@
         <input type="number" class="form-control" id="calorie-amount" placeholder="Calorie amount"  />
         <button id="add-entry" type="button" class="btn btn-primary">Add</button>
       </div>
-     </div>
-	  
-	  <div class="d-grid gap-2 my-3">
-  <button class="btn btn-primary" id="reset-button" type="button">Reset</button>
-  
-</div>
-	  
-	  
-	  
-	  
+    </div>
+    <div class="d-grid gap-2 my-3">
+      <button class="btn btn-primary" id="reset-button" type="button">Reset</button>
+    </div>
     <p id="result" class="text-center"></p>
     <div id="entry-list"> 
       <!-- List items will be rendered here --> 
@@ -84,8 +78,9 @@
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Food" data-calories="10">10 Cal</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Bread" data-calories="70">Bread (70 Cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Banana" data-calories="100">Banana (100 Cal)</button>
+      <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Yougurt" data-calories="80">Yogurt (80 Cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Popsicle" data-calories="40">Popsicle (40 cal)</button>
-		<button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Pickles" data-calories="10">Pickles (10 cal)</button>
+      <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Pickles" data-calories="10">Pickles (10 cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Black Beans" data-calories="440">Black Beans (440 cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Chick-fil-A Sandwich" data-calories="440">fil-A Sandwich (440 cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1" data-name="Chick-fil-A Waffle Fries" data-calories="440">fil-A Fries (440 cal)</button>
