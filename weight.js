@@ -14,6 +14,7 @@ function saveData() {
     localStorage.setItem("weightData2", entry + storedData);
   }
   log.insertAdjacentHTML("afterbegin", entry);
+  updateChart();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (storedData) {
     document.getElementById("log").innerHTML = storedData;
   }
+  updateChart();
 });
 
 const now = new Date();
@@ -35,11 +37,13 @@ function deleteEntry(btn) {
   const storedData = localStorage.getItem("weightData2");
   const newData = storedData.replace(entry.outerHTML, "");
   localStorage.setItem("weightData2", newData);
+  updateChart();
 }
 
 function resetData() {
   localStorage.removeItem("weightData2");
   document.getElementById("log").innerHTML = "";
+  updateChart();
 }
 
 function formatDate(date) {
@@ -52,4 +56,43 @@ function formatDate(date) {
 function getDayOfWeek(date) {
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   return days[date.getDay()];
+}
+
+function updateChart() {
+  const ctx = document.getElementById('weightChart').getContext('2d');
+  if (chart) {
+    chart.destroy();
+  }
+  const storedData = localStorage.getItem("weightData2");
+  const entries = storedData ? storedData.split("</li>") : [];
+  const labels = entries.map(entry => {
+    const match = entry.match(/\d{1,2}\/\d{1,2}\/\d{4}/);
+    return match ? match[0] : '';
+  }).filter(label => label !== '');
+  const weights = entries.map(entry => {
+    const match = entry.match(/(\d+\.\d+)\s+lbs/);
+    return match ? parseFloat(match[1]) : 0;
+  }).filter(weight => weight !== 0);
+  if (labels.length > 0 && weights.length > 0) {
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Weight',
+          data: weights,
+          backgroundColor: weights.map(weight => weight < 160 ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 99, 132, 0.2)'),
+          borderColor: weights.map(weight => weight < 160 ? 'rgba(0, 255, 0, 1)' : 'rgba(255, 99, 132, 1)'),
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
 }
