@@ -17,7 +17,7 @@
   <div class="container-fluid"> <a class="navbar-brand" href="index.html">WT</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">a
+      <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">WT</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -45,17 +45,14 @@
     <ul id="log-list" class="list-group">
     </ul>
   </div>
-  <div class="d-grid gap-2 my-1">
-    <button class="btn btn-primary mt-1" onclick="resetLog()">Reset</button>
-  </div>
+  
 </div>
 <div class="container">
-  <div id="buttons" class="mb-1"> 
+  <div id="buttons" class="mt-4"> 
     <!-- Buttons will be generated dynamically here --> 
   </div>
-  <div class="d-grid gap-2 my-1">
-    <button class="btn btn-primary" onclick="addNewButton()">Add New Button</button>
-    <button class="btn btn-secondary" onclick="resetButtons()">Reset</button>
+	<div class="d-grid gap-2 mt-4">
+    <button class="btn btn-primary" onclick="resetLog()">Reset</button>
   </div>
 </div>
 <script src="solver.js"></script> 

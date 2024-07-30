@@ -2,25 +2,19 @@
 var selectedItems = [];
 
 // Array of button labels
-var buttonLabels = [];
+var buttonLabels = ['Water', 'Seltzer', 'Cream', 'Beer', 'Takis', 'Skittles', 'Steak', 'Chicken', 'Rice', 'Bananas', 'Tomatoes', 'Cucumbers', 'Mozzarella', 'Gatorade', 'Chocolate'];
 
 // Function to generate buttons dynamically
 function generateButtons() {
     var buttonsContainer = document.getElementById('buttons');
-    // Clear existing buttons
-    buttonsContainer.innerHTML = '';
-    // Generate buttons for each label
-    buttonLabels.forEach(function(label, index) {
-        var buttonContainer = document.createElement('div');
-        buttonContainer.className = 'd-inline-block me-2';
+    buttonLabels.forEach(function(label) {
         var button = document.createElement('button');
-        button.className = 'btn btn-outline-secondary mb-1';
+        button.className = 'btn btn-outline-secondary m-1';
         button.textContent = label;
         button.onclick = function() {
             addToLog(label);
         };
-        buttonContainer.appendChild(button);
-        buttonsContainer.appendChild(buttonContainer);
+        buttonsContainer.appendChild(button);
     });
 }
 
@@ -80,44 +74,10 @@ function loadFromLocalStorage() {
     }
 }
 
-// Function to save button labels to local storage
-function saveButtonLabelsToLocalStorage() {
-    localStorage.setItem("buttonLabels", JSON.stringify(buttonLabels));
-}
-
-// Function to load button labels from local storage
-function loadButtonLabelsFromLocalStorage() {
-    var storedButtonLabels = localStorage.getItem("buttonLabels");
-    if (storedButtonLabels) {
-        buttonLabels = JSON.parse(storedButtonLabels);
-    }
-}
-
-// Load button labels and selected items from local storage when the page loads
-window.onload = function() {
-    loadButtonLabelsFromLocalStorage();
-    loadFromLocalStorage();
-    generateButtons();
-}
-
-// Function to add a new button
-function addNewButton() {
-    var newButtonLabel = prompt("Enter the label for the new button:");
-    if (newButtonLabel) {
-        buttonLabels.push(newButtonLabel);
-        saveButtonLabelsToLocalStorage();
-        generateButtons();
-    }
-}
-
-// Function to reset buttons
-function resetButtons() {
-    buttonLabels = [];
-    saveButtonLabelsToLocalStorage();
-    generateButtons();
-}
-
+// Get the input field element
 var inputField = document.getElementById('new-item');
+
+// Add an event listener to the input field
 inputField.addEventListener('keypress', function(event) {
     // Check if the Enter key was pressed
     if (event.key === 'Enter') {
@@ -127,3 +87,9 @@ inputField.addEventListener('keypress', function(event) {
         inputField.value = '';
     }
 });
+
+// Load selected items from local storage when the page loads
+window.onload = function() {
+    loadFromLocalStorage();
+    generateButtons();
+}
