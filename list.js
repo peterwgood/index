@@ -10,6 +10,12 @@ document.getElementById('new-item').addEventListener('keypress', (event) => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  listName = localStorage.getItem('listName') || 'List';
+  document.getElementById('list-name').textContent = listName;
+});
+
+
 // Add event listener for the rename list button
 document.getElementById('rename-list').addEventListener('click', renameList);
 
@@ -94,6 +100,8 @@ function deleteItem(index) {
 
 // Function to rename the list
 function renameList() {
+  listName = localStorage.getItem('listName') || 'List';
+  console.log('Before rename:', listName);
   const listNameSpan = document.getElementById('list-name');
   const listNameText = listNameSpan.textContent;
   listNameSpan.innerHTML = ''; // Clear the existing text
@@ -107,16 +115,17 @@ function renameList() {
     if (event.key === 'Enter') {
       const newListName = editInput.value.trim();
       listName = newListName;
-      listNameSpan.textContent = listName;
+      console.log('After rename:', listName);
+      document.getElementById('list-name').textContent = listName;
       localStorage.setItem('listName', listName);
     }
   });
   
   editInput.addEventListener('blur', () => {
-    listNameSpan.textContent = listName;
+    document.getElementById('list-name').textContent = listName;
+    localStorage.setItem('listName', listName);
   });
 }
-
 // Function to reset the list
 function resetList() {
   toDoList = [];
