@@ -67,7 +67,7 @@ function editItem(index) {
   
   const editInput = document.createElement('textarea'); // Changed to textarea
   editInput.value = itemText;
-  editInput.classList.add('editing'); // Add the 'editing' class to the input field
+  editInput.classList.add('editing', 'full-width'); // Add the 'full-width' class
   
   wrapper.appendChild(editInput);
   itemSpan.appendChild(wrapper);

@@ -1,32 +1,4 @@
-body {
-  font-family: "Dosis", sans-serif;
-  font-optical-sizing: auto;
-    /*! color: #fff !important; */
-    font-weight: 700;
-  /*! background-color: black; */
-}
 
-#calorie-chart {
-   max-width: 400px !important; */;
-  max-height: 400px !important; */;
-    margin: 0 auto;
-}
-
-.list-group-item {
-    
-    
-    background-color: transparent;
-  
-}
-
-.calorie-counter {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 .delete-button {
     float: right;
 }
@@ -48,10 +20,8 @@ body {
 }
 
 .wrapper {
-  display: inline-block;
-  width: max-content;
-  max-width: 100%;
-  word-wrap: break-word;
+ 
+ 
 }
 
 
