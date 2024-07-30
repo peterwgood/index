@@ -69,7 +69,7 @@ function createBarChart() {
       scales: {
         y: {
           beginAtZero: true,
-          max: 13000 // Adjust the max value as needed
+          max: 15000 // Adjust the max value as needed
         }
       },
       plugins: {
@@ -108,13 +108,15 @@ function updateChart() {
     const labels = [];
     const data = [];
     const backgroundColors = [];
+    const borderColors = [];
     entries.forEach((entry) => {
       if (entry) {
         const date = entry.match(/>(.*?):/)[1];
         const weight = parseFloat(entry.match(/:(.*?) Calories/)[1]);
         labels.push(date);
         data.push(weight);
-        backgroundColors.push(weight > 11900 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(75, 192, 192, 0.2)');
+        backgroundColors.push(weight > 11900 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(0, 255, 0, 0.2)');
+        borderColors.push(weight > 11900 ? 'rgba(255, 99, 132, 1)' : 'rgba(0, 255, 128, 1)'); // Light green border
       }
     });
     console.log('Labels:', labels);
@@ -122,12 +124,7 @@ function updateChart() {
     chart.data.labels = labels;
     chart.data.datasets[0].data = data;
     chart.data.datasets[0].backgroundColor = backgroundColors;
+    chart.data.datasets[0].borderColor = borderColors;
     chart.update();
   }
 }
-
-// Update the chart when data changes
-document.getElementById("log").addEventListener("DOMSubtreeModified", () => {
-  console.log('Log updated...');
-  updateChart();
-});
