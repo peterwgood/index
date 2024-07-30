@@ -14,7 +14,7 @@ function generateButtons() {
         var buttonContainer = document.createElement('div');
         buttonContainer.className = 'd-inline-block me-2';
         var button = document.createElement('button');
-        button.className = 'btn btn-outline-secondary';
+        button.className = 'btn btn-outline-secondary mb-1';
         button.textContent = label;
         button.onclick = function() {
             addToLog(label);
