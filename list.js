@@ -63,15 +63,22 @@ function editItem(index) {
   const listItem = document.querySelector(`#to-do-list li[data-index="${index}"]`);
   const itemSpan = listItem.querySelector('span');
   itemSpan.innerHTML = ''; // Clear the existing text
-  const editInput = document.createElement('input');
-  editInput.type = 'text';
+  
+  // Create a wrapper element
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('wrapper');
+  
+  const editInput = document.createElement('textarea'); // Changed to textarea
   editInput.value = itemText;
   editInput.classList.add('editing'); // Add the 'editing' class to the input field
-  itemSpan.appendChild(editInput);
+  
+  wrapper.appendChild(editInput);
+  itemSpan.appendChild(wrapper);
+  
   editInput.focus();
   
   editInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !event.shiftKey) {
       const newItem = editInput.value.trim();
       toDoList[index] = newItem;
       updateList();
@@ -82,7 +89,6 @@ function editItem(index) {
     updateList();
   });
 }
-
 // Function to delete an item from the list
 function deleteItem(index) {
   toDoList.splice(index, 1);
