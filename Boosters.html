@@ -26,7 +26,7 @@
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="Boosters.html">Mood</a> </li>
+         <li class="nav-item"> <a class="nav-link" href="Boosters.html">Energy</a> </li>
           <li class="nav-item"> <a class="nav-link" href="list.html">To-do</a> </li>
           <li class="nav-item"> <a class="nav-link" href="solver.html">Groceries</a> </li>
         </ul>
@@ -35,17 +35,18 @@
   </div>
 </nav>
 <div class="container">
-  <h1 class="text-center my-4">Boosters</h1>
+  <h1 class="text-center my-4">Energy</h1>
   <div class="chart-container" style="width:300px; height:300px; margin: 0 auto;">
     <canvas id="moodChart"></canvas>
   </div>
-  <div class="d-grid gap-2 my-3">
-    <button class="btn btn-primary" id="reset-button" type="button">Reset</button>
-  </div>
+  
   <ul id="foodLog" class="list-group mt-4">
   </ul>
   <div id="goodFoodButtons" class="mb-3 mt-3"></div>
   <div id="badFoodButtons" class="mb-3"> </div>
+	<div class="d-grid gap-2 my-3">
+    <button class="btn btn-primary" id="reset-button" type="button">Reset</button>
+  </div>
 </div>
 <script src="boosters.js"></script>
 </body>
