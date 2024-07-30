@@ -26,9 +26,12 @@ function addItem() {
 // Function to update the list HTML
 function updateList() {
   const listHTML = toDoList.map((item, index) => {
+    // Replace newline characters with HTML line breaks
+    const itemHTML = item.replace(/\n/g, '<br>');
+    
     return `
       <li class="list-group-item" data-index="${index}">
-        <span>${item}</span>
+        <span>${itemHTML}</span>
         <button class="delete btn btn-sm btn-danger" onclick="deleteItem(${index})">Delete</button>
         <button class="edit btn btn-sm btn-secondary" onclick="editItem(${index})">Edit</button>
       </li>
@@ -49,12 +52,6 @@ function updateList() {
       moveItem(oldIndex, newIndex);
     }
   });
-}
-
-// Function to move an item to a new position in the list
-function moveItem(oldIndex, newIndex) {
-  toDoList.splice(newIndex, 0, toDoList.splice(oldIndex, 1)[0]);
-  updateList();
 }
 
 // Function to edit an item in the list
