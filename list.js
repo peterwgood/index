@@ -128,4 +128,5 @@ document.addEventListener('DOMContentLoaded', function() {
     toDoList = JSON.parse(storedList);
     updateList();
   }
+
 });
