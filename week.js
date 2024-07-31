@@ -113,23 +113,31 @@ function updatePieChart() {
     window.chart.destroy();
   }
   const ctx = pieChartCanvas.getContext('2d');
-  const isOverLimit = totalConsumed > 11900;
-  const backgroundColor = isOverLimit ? ['red', 'red'] : ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'];
-  const borderColor = isOverLimit ? ['White', 'white'] : ['white', 'white'];
-  const borderWidth = isOverLimit ? 0 : 1;
 
   window.chart = new Chart(ctx, {
-    type: 'pie',
+    type: 'bar',
     data: {
-      labels: ['Total Calories Consumed', 'Remaining Calories'],
+      labels: daysOfWeek.slice(0, entries.length), // only show days with data
       datasets: [{
-        label: 'Calories',
-        data: [totalConsumed, calories],
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
-        borderWidth: borderWidth
+        label: 'Calories Consumed',
+        data: entries,
+        backgroundColor: entries.map(entry => entry > 1700 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(0, 255, 0, 0.2)'),
+        borderColor: entries.map(entry => entry > 1700 ? 'rgba(255, 99, 132, 1)' : 'rgba(0, 255, 0, 1)'), // match border color with background color
+        borderWidth: {
+          top: 2,
+          right: 2,
+          left: 2,
+          bottom: 0 // no bottom border
+        },
       }]
     },
+    options: {
+      scales: {
+        y: {
+          max: 3000 // set max limit of graph
+        }
+      }
+    }
   });
 }
 
