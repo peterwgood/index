@@ -93,7 +93,7 @@ function editItem(index) {
   
   editInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
-      const newItem = editInput.value.trim().replace('...', '<div style="page-break-after: always;"></div>');
+      const newItem = editInput.value.trim().replace('xx', '<div style="page-break-after: always;"></div>');
       if (newItem === '') {
         deleteItem(index);
       } else {
@@ -104,7 +104,7 @@ function editItem(index) {
   });
   
   editInput.addEventListener('blur', () => {
-    const newItem = editInput.value.trim().replace('...', '<div style="page-break-after: always;"></div>');
+    const newItem = editInput.value.trim().replace('xx', '<div style="page-break-after: always;"></div>');
     if (newItem === '') {
       deleteItem(index);
     } else {
