@@ -2,7 +2,34 @@
 var selectedItems = [];
 
 // Array of button labels
-var buttonLabels = ['Water', 'Seltzer', 'Cream', 'Coffee', 'Beer', 'Takis', 'Skittles', 'Steak', 'Chicken', 'Rice', 'Bananas', 'Tomatoes', 'Cucumbers', 'Mozzarella', 'Gatorade', 'Chocolate', 'Trash Bags', 'Splenda', 'Hand Soap', 'Atkins', 'Dish Soap', 'Beans', 'Yogurt', 'Money', 'Lottery'];
+var buttonLabels = [
+  // Beverages
+  'Water', 'Seltzer', 'Coffee', 'Gatorade', 'Beer',
+  
+  // Dairy
+  'Cream', 'Mozzarella', 'Yogurt', 'Feta', 'Milk',
+  
+  // Meat/Protein
+  'Steak', 'Chicken', 'Pork', 'Hamburgers', 'Hotdogs', 'Kielbasa', 'Hamburg',
+  
+  // Fruits
+  'Bananas', 'Blue Berries', 'Strawberries', 'Water Melon',
+  
+  // Vegetables
+  'Cucumbers', 'Beans', 'Tomatoes', 'Cesar Salad',
+  
+  // Grains
+  'Rice',
+  
+  // Sweets
+  'Chocolate', 'Skittles',
+  
+  // Miscellaneous Food
+  'Takis', 'Splenda', 'Atkins',
+  
+  // Non-Food Items
+  'Money', 'Hand Soap', 'Dish Soap', 'Trash Bags', 'Lottery'
+];
 
 // Function to generate buttons dynamically
 function generateButtons() {
