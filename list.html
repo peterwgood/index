@@ -22,11 +22,11 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-         <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Day</a> </li>
+          <li class="nav-item"> <a class="nav-link" aria-current="page" href="index.html">Day</a> </li>
           <li class="nav-item"> <a class="nav-link" href="week.html">Week</a> </li>
           <li class="nav-item"> <a class="nav-link" href="yearly.html">Weekly Totals</a> </li>
           <li class="nav-item"> <a class="nav-link" href="weight.html">Weight</a> </li>
-         <li class="nav-item"> <a class="nav-link" href="Boosters.html">Energy</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Boosters.html">Energy</a> </li>
           <li class="nav-item"> <a class="nav-link" href="list.html">To-do</a> </li>
           <li class="nav-item"> <a class="nav-link" href="solver.html">Groceries</a> </li>
         </ul>
@@ -35,9 +35,7 @@
   </div>
 </nav>
 <div class="container mt-4">
-  <h1 class="text-center mt-4"> <span id="list-name">To-Do</span>
-    <button id="rename-list" class="btn btn-secondary btn-sm mb-2 mx-1">Rename</button>
-  </h1>
+  <h1 class="text-center mt-4"> <span id="list-name">To-Do</span> </h1>
   <div class="input-group mb-3">
     <input id="new-item" type="text" placeholder="Add new item"  class="form-control">
     <button id="add-item" class="btn btn-primary">Add</button>
@@ -47,6 +45,7 @@
   </ul>
   <div class="d-grid gap-2 my-3">
     <button id="reset-list" class="btn btn-primary mb-2" onclick="resetList()">Reset</button>
+    <button id="rename-list" class="btn btn-secondary mb-2 mx-1 invisible">Rename</button>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
