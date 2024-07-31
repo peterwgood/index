@@ -16,7 +16,7 @@ var buttonLabels = [
   'Bananas', 'Blue Berries', 'Strawberries', 'Water Melon',
   
   // Vegetables
-  'Cucumbers', 'Beans', 'Tomatoes', 'Cesar Salad',
+  'Cucumbers', 'Beans', 'Tomatoes', 'Cesar Salad', 'Broccoli',
   
   // Grains
   'Rice',
