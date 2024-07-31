@@ -2,7 +2,7 @@
 var selectedItems = [];
 
 // Array of button labels
-var buttonLabels = ['Water', 'Seltzer', 'Cream', 'Beer', 'Takis', 'Skittles', 'Steak', 'Chicken', 'Rice', 'Bananas', 'Tomatoes', 'Cucumbers', 'Mozzarella', 'Gatorade', 'Chocolate', 'Trash Bags', 'Splenda', 'Hand Soap', 'Atkins', 'Dish Soap', 'Beans', 'Yogurt', 'Money', 'Lottery'];
+var buttonLabels = ['Water', 'Seltzer', 'Cream', 'Coffee', 'Beer', 'Takis', 'Skittles', 'Steak', 'Chicken', 'Rice', 'Bananas', 'Tomatoes', 'Cucumbers', 'Mozzarella', 'Gatorade', 'Chocolate', 'Trash Bags', 'Splenda', 'Hand Soap', 'Atkins', 'Dish Soap', 'Beans', 'Yogurt', 'Money', 'Lottery'];
 
 // Function to generate buttons dynamically
 function generateButtons() {
