@@ -20,7 +20,7 @@ function generateButtons() {
 
 // Function to add an item to the log
 function addToLog(item) {
-    selectedItems.push(item);
+    selectedItems.push({ name: item, selected: false });
     saveToLocalStorage();
     updateLog();
 }
@@ -46,7 +46,19 @@ function updateLog() {
     for (var i = 0; i < selectedItems.length; i++) {
         var li = document.createElement("li");
         li.className = 'list-group-item d-flex justify-content-between align-items-center';
-        li.textContent = selectedItems[i];
+        li.textContent = selectedItems[i].name;
+        if (selectedItems[i].selected) {
+            li.classList.add('selected');
+        }
+        li.onclick = function(index) {
+            return function() {
+                // Toggle the 'selected' class
+                this.classList.toggle('selected');
+                // Toggle the 'selected' state in the array
+                selectedItems[index].selected = !selectedItems[index].selected;
+                saveToLocalStorage();
+            }
+        }(i);
         var deleteButton = document.createElement("button");
         deleteButton.className = 'btn btn-danger btn-sm';
         deleteButton.onclick = function(index) {
