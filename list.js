@@ -29,10 +29,15 @@ function addItem() {
 }
 
 // Function to update the list HTML
+// Function to update the list HTML
+// Function to update the list HTML
 function updateList() {
   const listHTML = toDoList.map((item, index) => {
     // Replace newline characters with HTML line breaks
-    const itemHTML = item.replace(/\n/g, '<br>');
+    let itemHTML = item.replace(/\n/g, '<br>');
+    
+    // Replace "..." with a page break
+    itemHTML = itemHTML.replace(/(\.{3})/g, '<div style="page-break-after: always;"></div>');
     
     return `
       <li class="list-group-item" data-index="${index}">
@@ -64,7 +69,7 @@ function updateList() {
     });
   });
 }
-
+// Function to edit an item in the list
 // Function to edit an item in the list
 // Function to edit an item in the list
 function editItem(index) {
@@ -78,7 +83,7 @@ function editItem(index) {
   wrapper.classList.add('wrapper');
   
   const editInput = document.createElement('textarea'); // Changed to textarea
-  editInput.value = itemText;
+  editInput.value = itemText.replace(/<div style="page-break-after: always;"><\/div>/g, '...');
   editInput.classList.add('editing', 'full-width'); // Add the 'full-width' class
   
   wrapper.appendChild(editInput);
@@ -88,7 +93,7 @@ function editItem(index) {
   
   editInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
-      const newItem = editInput.value.trim();
+      const newItem = editInput.value.trim().replace('...', '<div style="page-break-after: always;"></div>');
       if (newItem === '') {
         deleteItem(index);
       } else {
@@ -99,7 +104,7 @@ function editItem(index) {
   });
   
   editInput.addEventListener('blur', () => {
-    const newItem = editInput.value.trim();
+    const newItem = editInput.value.trim().replace('...', '<div style="page-break-after: always;"></div>');
     if (newItem === '') {
       deleteItem(index);
     } else {
@@ -108,7 +113,6 @@ function editItem(index) {
     }
   });
 }
-
 // Function to delete an item from the list
 function deleteItem(index) {
   toDoList.splice(index, 1);
