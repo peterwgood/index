@@ -10,7 +10,7 @@ var buttonLabels = [
   'Cream', 'Mozzarella', 'Yogurt', 'Feta', 'Milk',
   
   // Meat/Protein
-  'Steak', 'Chicken', 'Pork', 'Hamburgers', 'Hotdogs', 'Kielbasa', 'Hamburg',
+  'Steak', 'Chicken','Eggs', 'Pork', 'Hamburgers', 'Hotdogs', 'Kielbasa', 'Hamburg',
   
   // Fruits
   'Bananas', 'Blue Berries', 'Strawberries', 'Water Melon',
