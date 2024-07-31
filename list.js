@@ -66,6 +66,7 @@ function updateList() {
 }
 
 // Function to edit an item in the list
+// Function to edit an item in the list
 function editItem(index) {
   const itemText = toDoList[index];
   const listItem = document.querySelector(`#to-do-list li[data-index="${index}"]`);
@@ -88,13 +89,23 @@ function editItem(index) {
   editInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       const newItem = editInput.value.trim();
-      toDoList[index] = newItem;
-      updateList();
+      if (newItem === '') {
+        deleteItem(index);
+      } else {
+        toDoList[index] = newItem;
+        updateList();
+      }
     }
   });
   
   editInput.addEventListener('blur', () => {
-    updateList();
+    const newItem = editInput.value.trim();
+    if (newItem === '') {
+      deleteItem(index);
+    } else {
+      toDoList[index] = newItem;
+      updateList();
+    }
   });
 }
 
