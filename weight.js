@@ -68,11 +68,11 @@ function updateChart() {
   const labels = entries.map(entry => {
     const match = entry.match(/\d{1,2}\/\d{1,2}\/\d{4}/);
     return match ? match[0] : '';
-  }).filter(label => label !== '');
+  }).filter(label => label !== '').reverse(); // Reverse the labels array
   const weights = entries.map(entry => {
     const match = entry.match(/(\d+\.\d+)\s+lbs/);
     return match ? parseFloat(match[1]) : 0;
-  }).filter(weight => weight !== 0);
+  }).filter(weight => weight !== 0).reverse(); // Reverse the weights array
   if (labels.length > 0 && weights.length > 0) {
     chart = new Chart(ctx, {
       type: 'bar',
