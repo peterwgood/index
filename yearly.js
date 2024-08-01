@@ -119,6 +119,11 @@ function updateChart() {
         borderColors.push(weight > 11900 ? 'rgba(255, 99, 132, 1)' : 'rgba(0, 255, 128, 1)'); // Light green border
       }
     });
+    // Reverse the arrays
+    labels.reverse();
+    data.reverse();
+    backgroundColors.reverse();
+    borderColors.reverse();
     console.log('Labels:', labels);
     console.log('Data:', data);
     chart.data.labels = labels;
