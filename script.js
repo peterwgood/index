@@ -15,19 +15,19 @@ document.addEventListener("DOMContentLoaded", function(){
   };
 
   function addEntry(name, calorieAmount) {
-  if (name !== "" && !isNaN(calorieAmount)) {
-    data.remainingCalories -= calorieAmount;
-    data.totalCaloriesUsed += calorieAmount;
-    data.entries.push({ name, calorieAmount });
-    saveData();
-    renderEntryList();
-    renderCaloriesChart(); // Add this line to update the chart
-    nameInput.value = "";
-    calorieAmountInput.value = "";
-  } else {
-    alert("Please enter a valid name and calorie amount.");
+    if (name !== "" && !isNaN(calorieAmount)) {
+      data.remainingCalories -= calorieAmount;
+      data.totalCaloriesUsed += calorieAmount;
+      data.entries.push({ name, calorieAmount });
+      saveData();
+      renderEntryList();
+      renderCaloriesChart(); // Add this line to update the chart
+      nameInput.value = "";
+      calorieAmountInput.value = "";
+    } else {
+      alert("Please enter a valid name and calorie amount.");
+    }
   }
-}
 
   addEntryButton.addEventListener("click", () => {
     const name = nameInput.value.trim();
@@ -87,10 +87,49 @@ document.addEventListener("DOMContentLoaded", function(){
         renderEntryList();
         entryElement.remove();
       }
+    } else if (event.target.tagName === "SPAN") {
+      const entryElement = event.target.closest("li");
+      const entryNameElement = event.target;
+      const entryName = entryNameElement.textContent;
+      const [name, calorieAmount] = entryName.split(" - ");
+      const index = data.entries.findIndex((entry) => entry.name === name && entry.calorieAmount === parseInt(calorieAmount));
+
+      if (index > -1) {
+        const inputField = document.createElement("input");
+        inputField.type = "text";
+        inputField.value = name;
+        entryNameElement.replaceWith(inputField);
+        inputField.focus();
+
+        inputField.addEventListener("blur", () => {
+          const newName = inputField.value.trim();
+          if (newName !== "") {
+            data.entries[index].name = newName;
+            saveData();
+            renderEntryList();
+          } else {
+            alert("Please enter a valid name.");
+          }
+        });
+
+        inputField.addEventListener("keypress", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            const newName = inputField.value.trim();
+            if (newName !== "") {
+              data.entries[index].name = newName;
+              saveData();
+              renderEntryList();
+            } else {
+              alert("Please enter a valid name.");
+            }
+          }
+        });
+      }
     }
   });
 
-  resetButton.addEventListener("click", () => {
+     resetButton.addEventListener("click", () => {
     data = {
       remainingCalories: 1700,
       totalCaloriesUsed: 0,
@@ -120,50 +159,45 @@ document.addEventListener("DOMContentLoaded", function(){
     totalCaloriesUsedElement.textContent = data.totalCaloriesUsed;
     renderCaloriesChart();
   }
-	
-	
 
   let chart; // Declare chart variable outside the function
 
-function renderCaloriesChart() {
-  const ctx = document.getElementById('caloriesChart').getContext('2d');
-  let totalCaloriesUsed = data.totalCaloriesUsed;
-  let remainingCalories = data.remainingCalories;
+  function renderCaloriesChart() {
+    const ctx = document.getElementById('caloriesChart').getContext('2d');
+    let totalCaloriesUsed = data.totalCaloriesUsed;
+    let remainingCalories = data.remainingCalories;
 
-  // Check if totalCaloriesUsed is less than 0
-  if (totalCaloriesUsed < 0) {
-    totalCaloriesUsed = 0; // Set to initial value
-    remainingCalories = 1700; // Set to initial value
-    // Change the entire pie chart to black
-    backgroundColor = ['#000', '#000'];
-  } else {
-    backgroundColor = [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
+    // Check if totalCaloriesUsed is less than 0
+    if (totalCaloriesUsed < 0) {
+      totalCaloriesUsed = 0; // Set to initial value
+      remainingCalories = 1700; // Set to initial value
+      // Change the entire pie chart to black
+      backgroundColor = ['#000', '#000'];
+    } else {
+      backgroundColor = [totalCaloriesUsed >= 1700 ? '#dc3545' : 'pink', '#ADD8E6'];
+    }
+
+    if (!chart) { // Check if chart is not created
+      chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Calories Used', 'Remaining Calories'],
+          datasets: [{
+            data: [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)],
+            backgroundColor: backgroundColor
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    } else { // If chart is already created, update the data
+      chart.data.datasets[0].data = [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)];
+      chart.data.datasets[0].backgroundColor = backgroundColor;
+      chart.update();
+    }
   }
-
-  if (!chart) { // Check if chart is not created
-    chart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Calories Used', 'Remaining Calories'],
-        datasets: [{
-          data: [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)],
-          backgroundColor: backgroundColor
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
-  } else { // If chart is already created, update the data
-    chart.data.datasets[0].data = [Math.min(totalCaloriesUsed, 1700), Math.max(remainingCalories, 0)];
-    chart.data.datasets[0].backgroundColor = backgroundColor;
-    chart.update();
-  }
-}
-
-	
-	
 
   function saveData() {
     const jsonData = JSON.stringify(data);
