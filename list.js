@@ -25,10 +25,11 @@ function addItem() {
     toDoList.push(newItem);
     updateList();
     document.getElementById('new-item').value = '';
-    localStorage.setItem('toDoList', JSON.stringify(toDoList)); // Update local storage
   }
 }
 
+// Function to update the list HTML
+// Function to update the list HTML
 // Function to update the list HTML
 function updateList() {
   const listHTML = toDoList.map((item, index) => {
@@ -62,21 +63,14 @@ function updateList() {
   
   // Add event listener to each list item
   document.querySelectorAll('#to-do-list li').forEach((item) => {
-    item.addEventListener('click', (event) => {
-      if (event.detail === 1) { // Single click
-        const index = item.dataset.index;
-        editItem(index);
-      }
-    });
-
-    item.addEventListener('dblclick', (event) => {
-      event.preventDefault(); // Prevent single click event from firing
+    item.addEventListener('click', () => {
       const index = item.dataset.index;
-      deleteItem(index);
+      editItem(index);
     });
   });
 }
-
+// Function to edit an item in the list
+// Function to edit an item in the list
 // Function to edit an item in the list
 function editItem(index) {
   const itemText = toDoList[index];
@@ -105,7 +99,6 @@ function editItem(index) {
       } else {
         toDoList[index] = newItem;
         updateList();
-        localStorage.setItem('toDoList', JSON.stringify(toDoList)); // Update local storage
       }
     }
   });
@@ -116,20 +109,17 @@ function editItem(index) {
       deleteItem(index);
     } else {
       toDoList[index] = newItem;
-
       updateList();
-      localStorage.setItem('toDoList', JSON.stringify(toDoList)); // Update local storage
     }
   });
 }
-
 // Function to delete an item from the list
 function deleteItem(index) {
   toDoList.splice(index, 1);
   updateList();
-  localStorage.setItem('toDoList', JSON.stringify(toDoList)); // Update local storage
 }
 
+// Function to rename the list
 // Function to rename the list
 function renameList() {
   const listNameSpan = document.getElementById('list-name');
@@ -158,6 +148,9 @@ function renameList() {
   });
 }
 
+// Add event listener to the list name
+document.getElementById('list-name').addEventListener('click', renameList);
+
 // Function to reset the list
 function resetList() {
   toDoList = [];
@@ -168,7 +161,7 @@ function resetList() {
 // Load the list items from local storage when the page is loaded
 document.addEventListener('DOMContentLoaded', function() {
   const storedList = localStorage.getItem('toDoList');
-  if (storedList) {
+    if (storedList) {
     toDoList = JSON.parse(storedList);
     updateList();
   }
@@ -178,5 +171,4 @@ document.addEventListener('DOMContentLoaded', function() {
 function moveItem(oldIndex, newIndex) {
   toDoList.splice(newIndex, 0, toDoList.splice(oldIndex, 1)[0]);
   updateList();
-  localStorage.setItem('toDoList', JSON.stringify(toDoList)); // Update local storage
 }
