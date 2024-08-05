@@ -29,6 +29,8 @@ function addItem() {
 }
 
 // Function to update the list HTML
+// Function to update the list HTML
+// Function to update the list HTML
 function updateList() {
   const listHTML = toDoList.map((item, index) => {
     // Replace newline characters with HTML line breaks
@@ -52,7 +54,6 @@ function updateList() {
   // Make the list sortable
   $('#to-do-list').sortable({
     axis: 'y',
-    touch: true,
     update: function(event, ui) {
       const newIndex = ui.item.index();
       const oldIndex = ui.item.data('index');
@@ -68,7 +69,8 @@ function updateList() {
     });
   });
 }
-
+// Function to edit an item in the list
+// Function to edit an item in the list
 // Function to edit an item in the list
 function editItem(index) {
   const itemText = toDoList[index];
@@ -111,7 +113,6 @@ function editItem(index) {
     }
   });
 }
-
 // Function to delete an item from the list
 function deleteItem(index) {
   toDoList.splice(index, 1);
@@ -119,10 +120,11 @@ function deleteItem(index) {
 }
 
 // Function to rename the list
+// Function to rename the list
 function renameList() {
   const listNameSpan = document.getElementById('list-name');
   const listNameText = listNameSpan.textContent;
-    listNameSpan.innerHTML = ''; // Clear the existing text
+  listNameSpan.innerHTML = ''; // Clear the existing text
   const editInput = document.createElement('input');
   editInput.type = 'text';
   editInput.value = listNameText;
@@ -159,7 +161,7 @@ function resetList() {
 // Load the list items from local storage when the page is loaded
 document.addEventListener('DOMContentLoaded', function() {
   const storedList = localStorage.getItem('toDoList');
-  if (storedList) {
+    if (storedList) {
     toDoList = JSON.parse(storedList);
     updateList();
   }
