@@ -58,11 +58,11 @@ function createButton(food, mood, container) {
 function updateMoodChart() {
   if (GoodCount === 0 && BadCount === 0) {
     chart.data.datasets[0].data = [1, 1];
-    chart.data.datasets[0].backgroundColor = ['#ADD8E6', '#ADD8E6'];
+    chart.data.datasets[0].backgroundColor = ['#90EE90', 'red'];
     chart.options.elements.arc.borderWidth = 0;
   } else {
     chart.data.datasets[0].data = [GoodCount, BadCount];
-    chart.data.datasets[0].backgroundColor = ['#90EE90', '#ADD8E6'];
+    chart.data.datasets[0].backgroundColor = ['#90EE90', 'red'];
     chart.options.elements.arc.borderWidth = 1;
   }
   chart.update();
