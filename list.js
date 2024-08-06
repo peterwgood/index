@@ -2,56 +2,40 @@
 let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 let listName = localStorage.getItem('listName') || 'List';
 
-// Add event listeners for the add item button and input field
-document.getElementById('add-item').addEventListener('click', addItem);
-document.getElementById('new-item').addEventListener('keypress', (event) => {
+// Add event listeners
+$('#add-item').on('click', addItem);
+$('#new-item').on('keypress', function(event) {
   if (event.key === 'Enter') {
     addItem();
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  listName = localStorage.getItem('listName') || 'List';
-  document.getElementById('list-name').textContent = listName;
+$(document).ready(function() {
+  $('#list-name').text(listName);
+  $('#rename-list').on('click', renameList);
+  updateList();
 });
-
-// Add event listener for the rename list button
-document.getElementById('rename-list').addEventListener('click', renameList);
 
 // Function to add a new item to the list
 function addItem() {
-  const newItem = document.getElementById('new-item').value.trim();
+  const newItem = $('#new-item').val().trim();
   if (newItem !== '') {
     toDoList.push(newItem);
     updateList();
-    document.getElementById('new-item').value = '';
+    $('#new-item').val('');
   }
 }
 
 // Function to update the list HTML
-// Function to update the list HTML
-// Function to update the list HTML
 function updateList() {
   const listHTML = toDoList.map((item, index) => {
-    // Replace newline characters with HTML line breaks
     let itemHTML = item.replace(/\n/g, '<br>');
-    
-    // Replace "..." with a page break
-    itemHTML = itemHTML.replace(/(\.{3})/g, '<div style="page-break-after: always;"></div>');
-    
-    return `
-      <li class="list-group-item" data-index="${index}">
-        <span>${itemHTML}</span>
-      </li>
-    `;
+    return `<li class="list-group-item" data-index="${index}"><span>${itemHTML}</span></li>`;
   }).join('');
   
-  document.getElementById('to-do-list').innerHTML = listHTML;
-  
-  // Store the list items in local storage
+  $('#to-do-list').html(listHTML);
   localStorage.setItem('toDoList', JSON.stringify(toDoList));
   
-  // Make the list sortable
   $('#to-do-list').sortable({
     axis: 'y',
     update: function(event, ui) {
@@ -61,39 +45,27 @@ function updateList() {
     }
   });
   
-  // Add event listener to each list item
-  document.querySelectorAll('#to-do-list li').forEach((item) => {
-    item.addEventListener('click', () => {
-      const index = item.dataset.index;
-      editItem(index);
-    });
+  $('#to-do-list li').on('click', function() {
+    const index = $(this).data('index');
+    editItem(index);
   });
 }
-// Function to edit an item in the list
-// Function to edit an item in the list
+
 // Function to edit an item in the list
 function editItem(index) {
   const itemText = toDoList[index];
-  const listItem = document.querySelector(`#to-do-list li[data-index="${index}"]`);
-  const itemSpan = listItem.querySelector('span');
-  itemSpan.innerHTML = ''; // Clear the existing text
+  const listItem = $(`#to-do-list li[data-index="${index}"]`);
+  const itemSpan = listItem.find('span');
+  itemSpan.html(''); // Clear the existing text
   
-  // Create a wrapper element
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('wrapper');
-  
-  const editInput = document.createElement('textarea'); // Changed to textarea
-  editInput.value = itemText.replace(/<div style="page-break-after: always;"><\/div>/g, '...');
-  editInput.classList.add('editing', 'full-width'); // Add the 'full-width' class
-  
-  wrapper.appendChild(editInput);
-  itemSpan.appendChild(wrapper);
+  const editInput = $('<textarea>').val(itemText).addClass('editing full-width');
+  itemSpan.append(editInput);
   
   editInput.focus();
   
-  editInput.addEventListener('keypress', (event) => {
+  editInput.on('keypress', function(event) {
     if (event.key === 'Enter' && !event.shiftKey) {
-      const newItem = editInput.value.trim().replace('xx', '<div style="page-break-after: always;"></div>');
+      const newItem = $(this).val().trim();
       if (newItem === '') {
         deleteItem(index);
       } else {
@@ -103,8 +75,8 @@ function editItem(index) {
     }
   });
   
-  editInput.addEventListener('blur', () => {
-    const newItem = editInput.value.trim().replace('xx', '<div style="page-break-after: always;"></div>');
+  editInput.on('blur', function() {
+    const newItem = $(this).val().trim();
     if (newItem === '') {
       deleteItem(index);
     } else {
@@ -113,59 +85,53 @@ function editItem(index) {
     }
   });
 }
+
 // Function to delete an item from the list
 function deleteItem(index) {
   toDoList.splice(index, 1);
   updateList();
 }
 
-// Function to rename the list
+$(document).ready(function() {
+  $('#list-name').text(listName);
+  $('#list-name').on('click', renameList); // Bind renameList to #list-name
+  updateList();
+});
+
+
 // Function to rename the list
 function renameList() {
-  const listNameSpan = document.getElementById('list-name');
-  const listNameText = listNameSpan.textContent;
-  listNameSpan.innerHTML = ''; // Clear the existing text
-  const editInput = document.createElement('input');
-  editInput.type = 'text';
-  editInput.value = listNameText;
-  listNameSpan.appendChild(editInput);
+  const listNameSpan = $('#list-name');
+  const listNameText = listNameSpan.text();
+  listNameSpan.html(''); // Clear the existing text
+  const editInput = $('<input type="text">').val(listNameText);
+  listNameSpan.append(editInput);
   editInput.focus();
   
-  editInput.addEventListener('keypress', (event) => {
+  editInput.on('keypress', function(event) {
     if (event.key === 'Enter') {
-      const newListName = editInput.value.trim();
+      const newListName = $(this).val().trim();
       listName = newListName;
-      document.getElementById('list-name').textContent = listName;
+      listNameSpan.text(listName);
       localStorage.setItem('listName', listName);
-      editInput.remove();
+      $(this).remove();
     }
   });
   
-  editInput.addEventListener('blur', () => {
-    document.getElementById('list-name').textContent = listName;
+  editInput.on('blur', function() {
+    const newListName = $(this).val().trim();
+    listName = newListName;
+    listNameSpan.text(listName);
     localStorage.setItem('listName', listName);
-    editInput.remove();
+    $(this).remove();
   });
 }
 
-// Add event listener to the list name
-document.getElementById('list-name').addEventListener('click', renameList);
-
-// Function to reset the list
 function resetList() {
-  toDoList = [];
-  updateList();
-  localStorage.removeItem('toDoList');
+toDoList = [];
+updateList();
+localStorage.removeItem('toDoList');
 }
-
-// Load the list items from local storage when the page is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  const storedList = localStorage.getItem('toDoList');
-    if (storedList) {
-    toDoList = JSON.parse(storedList);
-    updateList();
-  }
-});
 
 // Function to move an item in the list
 function moveItem(oldIndex, newIndex) {
