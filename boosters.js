@@ -5,11 +5,13 @@ const BadFoodButtons = document.getElementById('badFoodButtons');
 const resetButton = document.getElementById('reset-button');
 
 const GoodFoods = [
-  'Good Sleep', 'Nap', 'Physical Activity', 'Water/Gatorade', 'Sunlight', 'Beans', 'Bananas', 'Apples', 'Yogurt', 'Milk', 'Advocado', 'Eggs', 'Pickles', 'Nuts', 'Protein', 'Building Social Relationships', 'Focused in On a Project', 'Problem Solving', 'Insights', 'Drinking', 'Mastery', 'Learning', 'Having my Work Organized', 'Having something to do with family', 'Buying stuff for others', 'Cleaning', 'Engaging TV-MA (Trial&Error)'
+  'Good Sleep', 'Nap', 'Physical Activity', 'Water', 'Sunlight', 'Beans', 'Bananas', 'Apples', 'Yogurt', 'Milk', 'Advocado', 'Eggs', 'Pickles', 'Nuts', 'Protein',
+  '\n', // Newline character for line break
+  'Building Social Relationships', 'Focused in On a Project', 'Problem Solving', 'Insights', 'Drinking', 'Mastery', 'Learning', 'Having my Work Organized', 'Having something to do with family', 'Cleaning', 'TV Series (Flow)'
 ];
 
 const BadFoods = [
-  'Bad Sleep', 'Dyhydrated', 'Hungry', 'Hangover', 'Lack of Caffiene', 'Too Much Caffiene', 'Lack of Protein', 'No Physical Activity', 'Sick', 'Disagreement', 'Overwhelmed', 'Underwhelmed', 'Laziness', 'Eating Unhealthy Food', 'Declining Social', 'Not working', 'Not Out', 'Too much Out'
+ '\n', 'Disagreement','Bad Sleep', 'No Physical Activity', 'Overwhelmed', 'Hungry', 'Dyhydrated', 'Lack of Caffiene', 'Hangover', 'Sick', 'Eating Unhealthy Food', 'Declining Social', 'Not working', 'Not Out', 'Too much Out'
 ];
 
 let GoodCount = 0;
@@ -47,13 +49,20 @@ updateMoodChart();
 resetButton.addEventListener('click', resetLog);
 
 function createButton(food, mood, container) {
-  const button = document.createElement('button');
-  button.textContent = food;
-  button.className = 'btn m-1';
-  button.classList.add(mood === 'Good' ? 'btn-outline-success' : 'btn-outline-danger');
-  button.addEventListener('click', () => addFoodEntry(food, mood));
-  container.appendChild(button);
+  if (food === '' || food === '\n') {
+    container.innerHTML += '<hr>'; // Insert horizontal rule
+  } else {
+    const button = document.createElement('button');
+    button.textContent = food;
+    button.className = 'btn m-1';
+    button.classList.add(mood === 'Good' ? 'btn-outline-success' : 'btn-outline-danger');
+    button.addEventListener('click', () => addFoodEntry(food, mood));
+    container.appendChild(button);
+  }
 }
+
+
+
 
 function updateMoodChart() {
   if (GoodCount === 0 && BadCount === 0) {
