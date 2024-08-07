@@ -50,7 +50,8 @@ resetButton.addEventListener('click', resetLog);
 
 function createButton(food, mood, container) {
   if (food === '' || food === '\n') {
-    container.innerHTML += '<hr>'; // Insert horizontal rule
+    const hr = document.createElement('hr');
+    container.appendChild(hr); // Append the <hr> element
   } else {
     const button = document.createElement('button');
     button.textContent = food;
