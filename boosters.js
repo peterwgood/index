@@ -9,7 +9,7 @@ const GoodFoods = [
 ];
 
 const BadFoods = [
-  'Bad Sleep', 'Dyhydrated', 'Hungry', 'Hangover', 'Lack of Caffiene', 'Too Much Caffiene', 'Lack of Protein', 'No Physical Activity', 'Sick',  'Conflict', 'Disagreement', 'Overwhelmed', 'Underwhelmed', 'Laziness', 'Eating Unhealthy Food', 'Declining Social', 'Not working', 'Not Out', 'Too much Out'
+  'Bad Sleep', 'Dyhydrated', 'Hungry', 'Hangover', 'Lack of Caffiene', 'Too Much Caffiene', 'Lack of Protein', 'No Physical Activity', 'Sick', 'Disagreement', 'Overwhelmed', 'Underwhelmed', 'Laziness', 'Eating Unhealthy Food', 'Declining Social', 'Not working', 'Not Out', 'Too much Out'
 ];
 
 let GoodCount = 0;
@@ -70,8 +70,9 @@ function updateMoodChart() {
 
 function addToLog(food, mood, save = true) {
   const li = document.createElement('li');
-  li.textContent = `${food} (${mood})`;
+  li.textContent = food;
   li.className = 'list-group-item d-flex justify-content-between align-items-center';
+  li.style.color = mood === 'Good' ? '#28a745' : '#dc3545'; // Change text color based on mood
 
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'Delete';
@@ -84,7 +85,6 @@ function addToLog(food, mood, save = true) {
     saveToLocalStorage(food, mood);
   }
 }
-
 function addFoodEntry(food, mood) {
   if (GoodFoods.includes(food)) {
     GoodCount++;
