@@ -10,13 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/url-js/2.6.0/url.min.js"></script>
 </head>
 <body>
-  <div class="nav-container"></div>
-    <script src="nav.js"></script>
+<div class="nav-container"></div>
 <div class="container mt-4">
   <h1 class="text-center mt-4">Daily Calories</h1>
   <div class="chart-container" style=" width:300px; height:300px; margin: 0 auto;">
@@ -32,12 +31,11 @@
         <button id="add-entry" type="button" class="btn btn-primary">Add</button>
       </div>
     </div>
-   
     <p id="result" class="text-center"></p>
     <div id="entry-list"> 
       <!-- List items will be rendered here --> 
     </div>
-	   <div class="d-grid gap-2 my-3">
+    <div class="d-grid gap-2 my-3">
       <button class="btn btn-primary" id="reset-button" type="button">Reset</button>
     </div>
     <div id="remaining-calories">
@@ -62,7 +60,7 @@
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Food" data-calories="20">20 Cal</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Food" data-calories="10">10 Cal</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Bread" data-calories="70">Bread (70 Cal)</button>
-		 <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Eggs" data-calories="70">Eggs (70 Cal)</button>
+      <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Eggs" data-calories="70">Eggs (70 Cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Banana" data-calories="100">Banana (100 Cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Yogurt" data-calories="80">Yogurt (80 Cal)</button>
       <button type="button" class="btn btn-outline-secondary add-calorie-button m-1 btn-sm" data-name="Popsicle" data-calories="40">Popsicle (40 cal)</button>
@@ -93,8 +91,10 @@
       <button type="button" class="btn btn-outline-success add-calorie-button m-1 btn-sm" data-name="Calories Burnt" data-calories="-10">Cal's Burnt (10 cal)</button>
     </div>
   </form>
-	
 </div>
+<div class="footer"></div>
+<script src="nav.js"></script> 
+<script src="footer.js"></script> 
 <script src="script.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
