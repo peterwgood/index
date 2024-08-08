@@ -1,3 +1,4 @@
+
 // Define functions and variables
 let chart; // Define chart in the global scope
 
