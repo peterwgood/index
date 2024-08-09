@@ -4,30 +4,47 @@ var selectedItems = [];
 // Array of button labels
 var buttonLabels = [
   // Beverages
+  'Beverages ',
   'Water', 'Seltzer', 'Coffee', 'Gatorade', 'Beer',
+  '\n', // Newline character for line break
   
   // Dairy
+  'Dairy ',
   'Cream', 'Mozzarella', 'Yogurt', 'Feta', 'Milk',
+  '\n', // Newline character for line break
   
   // Meat/Protein
-  'Steak', 'Chicken','Eggs', 'Pork', 'Hamburgers', 'Hotdogs', 'Kielbasa', 'Hamburg',
+  'Meat ',
+  'Steak', 'Chicken', 'Egg', 'Pork', 'Hamburgers', 'Hotdogs', 'Kielbasa', 'Hamburg',
+  '\n', // Newline character for line break
   
   // Fruits
-  'Bananas', 'Blue Berries', 'Strawberries', 'Water Melon',
+  'Fruits ',
+  'Bananas', 'Blue Berries', 'Strawberries', 'Water Melon', 'Peach',
+  '\n', // Newline character for line break
   
   // Vegetables
-  'Cucumbers', 'Beans', 'Tomatoes', 'Cesar Salad', 'Broccoli',
+  'Vegetables ',
+  'Cucumber', 'Beans', 'Tomatoes', 'Cesar Salad', 'Broccoli',
+  '\n', // Newline character for line break
   
   // Grains
-  'Rice',
+  'Grains ',
+  'Rice', 'Bread', 'Spagetti',
+  '\n', // Newline character for line break
   
   // Sweets
+  'Sweets ',
   'Chocolate', 'Skittles',
+  '\n', // Newline character for line break
   
   // Miscellaneous Food
+  'Miscellaneous Food ',
   'Takis', 'Splenda', 'Atkins',
+  '\n', // Newline character for line break
   
   // Non-Food Items
+  'Non-Food Items ',
   'Money', 'Hand Soap', 'Dish Soap', 'Trash Bags', 'Lottery'
 ];
 
@@ -35,13 +52,25 @@ var buttonLabels = [
 function generateButtons() {
     var buttonsContainer = document.getElementById('buttons');
     buttonLabels.forEach(function(label) {
-        var button = document.createElement('button');
-        button.className = 'btn btn-outline-secondary m-1';
-        button.textContent = label;
-        button.onclick = function() {
-            addToLog(label);
-        };
-        buttonsContainer.appendChild(button);
+        if (label === '\n') {
+            // Create a line break
+            var hr = document.createElement('hr');
+            buttonsContainer.appendChild(hr);
+        } else if (label.endsWith(' ')) {
+            // Create a heading
+            var heading = document.createElement('h4');
+            heading.textContent = label;
+            buttonsContainer.appendChild(heading);
+        } else {
+            // Create a button
+            var button = document.createElement('button');
+            button.className = 'btn btn-outline-secondary m-1';
+            button.textContent = label;
+            button.onclick = function() {
+                addToLog(label);
+            };
+            buttonsContainer.appendChild(button);
+        }
     });
 }
 
