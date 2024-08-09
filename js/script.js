@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function(){
       // Change the entire pie chart to black
       backgroundColor = ['#000', '#000'];
     } else {
-      backgroundColor = [totalCaloriesUsed >= 1700 ? '#ff000d' : 'black', '#90EE90'];
+      backgroundColor = [totalCaloriesUsed >= 1700 ? '#ff000d' : 'black', '#59ff59'];
     }
 
     if (!chart) { // Check if chart is not created
